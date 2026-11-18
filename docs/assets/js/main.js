@@ -182,3 +182,16 @@ if (lineage && !reduceMotion.matches) {
   }, { threshold: 0.4 });
   lineageObserver.observe(lineage);
 }
+
+/* Header download button appears once the hero's own install button scrolls out of view */
+const heroCta = document.querySelector('.hero-actions .btn-primary');
+const navEl = document.querySelector('.nav');
+const navCta = navEl && navEl.querySelector('.nav-cta');
+if (heroCta && navCta) {
+  new IntersectionObserver(([e]) => {
+    const on = !e.isIntersecting && e.boundingClientRect.top < 0;
+    navEl.classList.toggle('cta-on', on);
+    navCta.tabIndex = on ? 0 : -1;
+    navCta.setAttribute('aria-hidden', String(!on));
+  }).observe(heroCta);
+}

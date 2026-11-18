@@ -52,16 +52,14 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .nav {
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding: 12px var(--gutter);
+  height: 64px; padding: 0 var(--gutter);
   background: rgba(5, 7, 15, .6);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
   border-bottom: 1px solid var(--line);
 }
-.nav-brand { display: flex; align-items: center; gap: 8px; color: var(--pale); text-decoration: none; font-weight: 700; }
-.nav nav { display: flex; gap: clamp(12px, 3vw, 28px); font-size: 15px; }
-.nav nav a { color: var(--muted); text-decoration: none; transition: color var(--feedback); }
-.nav nav a:hover { color: var(--pale); }
+.nav-brand { display: flex; align-items: center; gap: 10px; color: var(--pale); text-decoration: none; font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
+.nav-brand img { width: 32px; height: 32px; }
 
 /* Buttons */
 .btn {
@@ -265,7 +263,6 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
   .grid, .steps { grid-template-columns: minmax(0, 1fr); }
   .mcp { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .rules div { grid-template-columns: 1fr; gap: 2px; }
-  .nav nav a:not(:last-child) { display: none; }
 }
 @media (max-width: 760px) {
   .scene-tabs button { font-size: 14px; padding: 0 12px; }
@@ -471,3 +468,9 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .steps .btn-quiet svg { width: 14px; height: 14px; }
 /* The result card hugs the left like the reply it belongs to, so it never reads as the user's message. */
 .chat-claude .result { width: fit-content; max-width: calc(100% - 28px); align-self: flex-start; padding-right: 22px; }
+
+/* Header download button: hidden while the hero's install button is on screen, then fades in. */
+.nav-cta { min-height: 36px; padding: 0 14px; font-size: 14px; border-radius: 9px; gap: 6px;
+  opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity var(--state), transform var(--state); }
+.nav-cta svg { width: 14px; height: 14px; }
+.nav.cta-on .nav-cta { opacity: 1; transform: none; pointer-events: auto; }

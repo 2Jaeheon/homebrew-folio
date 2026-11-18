@@ -54,7 +54,7 @@ async function copyText(text) {
 }
 document.querySelectorAll('.copy').forEach((btn) => {
   let timer;
-  // The hero copy button's inner light follows the pointer.
+  // The metal ring's highlight follows the pointer, like a small dent where the finger is.
   btn.addEventListener('pointermove', (e) => {
     const r = btn.getBoundingClientRect();
     btn.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');

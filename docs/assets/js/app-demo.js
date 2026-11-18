@@ -2,27 +2,38 @@
 
 /*
  * SHOWCASE: the app demo's script and timing, all in one place (milliseconds).
- * Each scene is one scroll step on desktop. Its `steps` are things the pointer clicks, in order; a click does
- * exactly what that control does in the app (see `act`). A step can carry its own `hold`.
+ * A scene plays only when its tab is clicked (scene one also plays once when the window first comes into view), always
+ * from the state the scenes before it leave. Its `steps` are things the pointer clicks, in order; a click does
+ * exactly what that control does in the app (see `act`). A step can carry its own `hold`; `type` types that text
+ * into the clicked field; `scroll` moves the pointer there without pressing.
  *   lead:  pause after a scene starts, before the pointer moves
  *   move:  pointer travel time to the next target
  *   press: pointer down before the click lands
  *   hold:  wait after a click before the next step
- *   loopRest: on phones the scenes play as one loop; the pause before it starts over
+ *   key:   time per typed letter
+ *   load:  how long 공고를 불러오는 중… shows before the page is loaded
  */
+const POSTING_URL = 'https://recruit.webtoonscorp.com/rcrt/view.do?annoId=30005648';
 const SHOWCASE = {
   lead: 450,
   move: 750,
   press: 160,
   hold: 1100,
-  loopRest: 2600,
+  key: 32,
+  load: 1500,
   scenes: [
     { tab: '내 문서', title: '내 문서', text: '계속 다듬는 이력서와 포트폴리오는 내 문서에 둡니다. 고르면 버전 목록과 문서가 바로 열립니다.',
       steps: [{ at: 'row:resume' }] },
     { tab: '버전', title: '버전', text: '고칠 때마다 v1, v2… 새 버전과 메모가 쌓입니다. 예전 버전도 그대로 열어 볼 수 있습니다.',
       steps: [{ at: 'ver:resume:3' }, { at: 'ver:resume:2' }] },
-    { tab: '공고', title: '공고', text: '공고 URL을 붙여 넣으면 본문과 아이콘을 저장합니다. 공고가 내려가도 남아 있습니다.',
-      steps: [{ at: 'row:webtoon', hold: 1400 }] },
+    { tab: '공고 추가', title: '공고 추가', text: '공고 URL을 붙여 넣고 불러오면 본문과 아이콘을 저장합니다. 공고가 내려가도 저장한 내용은 남아 있습니다.',
+      steps: [
+        { at: 'sb:addApp', hold: 600 },
+        { at: 'sheet:url', type: POSTING_URL, hold: 500 },
+        { at: 'sheet:load', hold: 2500 },
+        { at: 'sheet:add', hold: 1300 },
+        { at: 'post:scroll:560', scroll: true, hold: 1600 },
+      ] },
     { tab: '비교', title: '맞춤 이력서와 비교', text: '내 문서의 한 버전을 공고로 가져와 그 공고에 맞게 고칩니다. 이전 버전과 나란히 놓으면 더한 글은 초록, 지운 글은 빨간색입니다.',
       steps: [{ at: 'ver:tailored:2' }, { at: 'tb:compare', hold: 2200 }] },
     { tab: '보기', title: '나란히, 또는 한 화면', text: '두 버전을 나란히 보거나, 바뀐 곳을 한 화면에 모아 봅니다. 다 봤으면 비교를 끕니다.',
@@ -64,6 +75,9 @@ const SHOWCASE = {
     daangn: { name: '당근', role: '백엔드 엔지니어', host: 'about.daangn.com', doc: 'daangn', noPosting: true },
   };
   const STATUS = { preparing: '준비 중', submitted: '제출 완료' };
+  // The application the 공고 추가 scene adds; the sidebar starts without it.
+  const NEW_APP = 'webtoon';
+  const PAGE = { title: `${APPINFO.webtoon.role} | NAVER WEBTOON`, chars: '4,812' };
   const SUBMITTED_ON = '11월 18일';
   const diffCount = { ins: 5, del: 3 };
 
@@ -86,6 +100,7 @@ const SHOWCASE = {
     split: '<rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M8 2.5v11"/>',
     pdf: '<path d="M4 1.8h5.4l3 3v9.4H4z"/><path d="M8.2 12.2V7.4M6.3 9.2l1.9-1.9 1.9 1.9"/>',
     open: '<rect x="2" y="2" width="12" height="12" rx="2.6"/><path d="M6.3 9.7l4-4M7 5.6h3.4V9"/>',
+    link: '<path d="M6.8 9.2a2.6 2.6 0 0 0 3.7 0l2.1-2.1a2.6 2.6 0 0 0-3.7-3.7l-.7.7"/><path d="M9.2 6.8a2.6 2.6 0 0 0-3.7 0L3.4 8.9a2.6 2.6 0 0 0 3.7 3.7l.7-.7"/>',
   };
   const ic = (name) => `<svg viewBox="0 0 16 16" aria-hidden="true">${I[name]}</svg>`;
 
@@ -123,8 +138,11 @@ const SHOWCASE = {
         ${Object.entries(MASTERS).map(([k, m]) => `<div class="row" data-at="row:${k}" data-item="${k}">${ic(m.icon)}<span class="t">${m.title}</span><span class="meta">v${DATES[k].length}</span></div>`).join('')}
         <div class="add">${ic('plus')}문서 추가</div>
         <p class="sec gap">공고</p>
-        ${APPS.map(([k, name, st]) => `<div class="row"${APPINFO[k] ? ` data-at="row:${k}"` : ''} data-item="${k}"><img src="assets/app/${k}.png" alt=""><span class="t">${name}</span><span class="meta" data-status-of="${k}">${STATUS[st]}</span></div>`).join('')}
-        <div class="add">${ic('plus')}공고 추가</div>`)}
+        ${APPS.map(([k, name, st]) => {
+          const row = `<div class="row"${APPINFO[k] ? ` data-at="row:${k}"` : ''} data-item="${k}"><img src="assets/app/${k}.png" alt=""><span class="t">${name}</span><span class="meta" data-status-of="${k}">${STATUS[st]}</span></div>`;
+          return k === NEW_APP ? `<div class="grow"><div>${row}</div></div>` : row;
+        }).join('')}
+        <div class="add" data-at="sb:addApp">${ic('plus')}공고 추가</div>`)}
       <span class="trash">${ic('trash')}</span>
     </aside>
 
@@ -133,7 +151,7 @@ const SHOWCASE = {
       <div class="dview doc backdrop"><div class="paper">
         ${['resume', 'portfolio', 'tailored', 'daangn'].flatMap((d) => DATES[d].map((_, i) => `<iframe data-doc="${d}:${i + 1}" src="${DOCS}${d}/v${i + 1}/index.html" loading="lazy" tabindex="-1" aria-hidden="true" title=""></iframe>`)).join('')}
       </div></div>
-      <div class="dview posting"><img src="assets/app/posting.png" alt="" width="838" height="2000" loading="lazy"></div>
+      <div class="dview posting" data-at="post:scroll:560"><img src="assets/app/posting.png" alt="" width="838" height="2000" loading="lazy"></div>
       <div class="dview cmp">
         <div class="split">
           <div class="cpane" style="left:0"><div class="phead">이전 버전 · v1 · ${day(DATES.tailored[0])}</div><div class="backdrop"></div><div class="paper"><iframe class="on" src="${DOCS}tailored/v1/index.html" loading="lazy" tabindex="-1" aria-hidden="true" title=""></iframe></div></div>
@@ -179,6 +197,13 @@ const SHOWCASE = {
       </div>
     </header>
 
+    <div class="sheet-dim"></div>
+    <div class="sheet">
+      <p class="sh-title">공고 추가</p>
+      <div class="sform"></div>
+      <div class="sbar"><span class="sh-lead"></span><span class="sbtn" data-at="sheet:cancel">취소</span><span class="sbtn prime"></span></div>
+    </div>
+
     <span class="pointer"><svg viewBox="0 0 26 26" aria-hidden="true" style="stroke:none"><path d="M5 2.5v18.2l4.4-4.3 2.9 6.6 3-1.3-2.9-6.5h6.2z" fill="#000" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg><i></i></span>
   </div>`;
 
@@ -192,6 +217,7 @@ const SHOWCASE = {
   /* State: what the window shows. `act` is every control the demo (or a visitor) can press. */
   const INITIAL = {
     sel: null, ver: { resume: 4, portfolio: 3 }, item: 'jd', comparing: false, mode: 'split',
+    added: false, sheet: null, postY: 0,
     status: Object.fromEntries(APPS.map(([k, , s]) => [k, s])),
   };
   const clone = (s) => JSON.parse(JSON.stringify(s));
@@ -199,10 +225,21 @@ const SHOWCASE = {
 
   function act(s, at) {
     const [kind, a, b] = at.split(':');
-    if (kind === 'row') { s.sel = a; s.comparing = false; if (APPINFO[a]) s.item = APPINFO[a].noPosting ? DATES[APPINFO[a].doc].length : 'jd'; }
+    if (kind === 'row') { s.sel = a; s.comparing = false; s.postY = 0; if (APPINFO[a]) s.item = APPINFO[a].noPosting ? DATES[APPINFO[a].doc].length : 'jd'; }
     if (kind === 'ver' && MASTERS[a]) s.ver[a] = +b;
     else if (kind === 'ver') s.item = +b;
-    if (kind === 'app' && !APPINFO[s.sel]?.noPosting) s.item = a;
+    if (kind === 'app' && !APPINFO[s.sel]?.noPosting) { s.item = a; s.postY = 0; }
+    if (at === 'sb:addApp' && !s.added) s.sheet = { phase: 'input', url: '' };
+    // NewApplicationSheet: 불러오기 loads, then 공고 추가 adds it and selects it. 취소 while loading goes back to the URL.
+    if (kind === 'sheet' && s.sheet) {
+      const sh = s.sheet;
+      if (a === 'cancel') { if (sh.phase === 'loading') sh.phase = 'input'; else s.sheet = null; }
+      else if (a === 'url' && sh.phase === 'input') sh.url = POSTING_URL;
+      else if (a === 'load' && sh.url && sh.phase === 'input') sh.phase = 'loading';
+      else if (a === 'loaded' && sh.phase === 'loading') sh.phase = 'loaded';
+      else if (a === 'add' && sh.phase !== 'input') Object.assign(s, { sheet: null, added: true, sel: NEW_APP, comparing: false, item: 'jd', postY: 0 });
+    }
+    if (kind === 'post' && b) s.postY = +b;
     // Only the NAVER WEBTOON resume has an earlier version to compare with.
     if (at === 'tb:compare' && s.sel === 'webtoon' && s.item === 2) s.comparing = !s.comparing;
     if (at === 'tb:split' || at === 'tb:inline') s.mode = a;
@@ -287,8 +324,12 @@ const SHOWCASE = {
     // Sidebar
     APPS.forEach(([k]) => { $(`.rows [data-status-of="${k}"]`).textContent = STATUS[s.status[k]]; });
     const sbBox = $('.sb .lensbox');
-    copyRows(sbBox);
-    placeLens(sbBox, s.sel && $(`.sb .rows [data-item="${s.sel}"]`), instant);
+    $('.sb .rows .grow').classList.toggle('on', s.added);
+    const placeSb = () => { copyRows(sbBox); placeLens(sbBox, s.sel && $(`.sb .rows [data-item="${s.sel}"]`), instant); };
+    // A new row opens first (`state`), then the lens slides to it.
+    if (s.added && !shown.added && !instant && !reduce.matches) later(placeSb, 320);
+    else placeSb();
+    shown.added = s.added;
 
     // Version column
     if (kind === 'master' && shown.doc !== s.sel) {
@@ -334,6 +375,9 @@ const SHOWCASE = {
     const view = kind === 'none' ? 'empty' : docKey ? 'doc' : 'posting';
     ['empty', 'doc', 'posting'].forEach((v) => $('.dview.' + v).classList.toggle('on', v === view));
     $('.dview.cmp').classList.toggle('on', s.comparing);
+    app.style.setProperty('--py', s.postY);
+    renderSheet();
+    if (s.sheet?.phase === 'loading') later(() => { state = act(state, 'sheet:loaded'); render(); }, SHOWCASE.load);
 
     // Toolbar
     const title = kind === 'master' ? MASTERS[s.sel].title : kind === 'app' ? info.name : 'Folio';
@@ -372,6 +416,33 @@ const SHOWCASE = {
     if (app.classList.contains('instant')) { void app.offsetWidth; app.classList.remove('instant'); }
   }
 
+  /* The 공고 추가 sheet (NewApplicationSheet): only the URL text changes while typing. */
+  const field = (label, value, cls = '') => `<div class="frow"><span class="flabel">${label}</span><span class="field ${cls}">${value}</span></div>`;
+  function renderSheet() {
+    const sh = state.sheet;
+    app.classList.toggle('sheeted', !!sh);
+    if (!sh) return; // the closing sheet keeps its last contents while it fades
+    if (shown.phase !== sh.phase) {
+      const loaded = sh.phase === 'loaded';
+      $('.sform').innerHTML = loaded
+        ? `<div class="fsec"><div class="pcard"><img src="assets/app/webtoon.png" alt=""><div><b>${PAGE.title}</b><span>${APPINFO.webtoon.host}</span></div></div></div>
+           <div class="fsec">${field('회사', APPINFO.webtoon.name)}${field('직무', APPINFO.webtoon.role)}</div>
+           <p class="ffoot">공고 내용 ${PAGE.chars}자를 저장해요.</p>`
+        : `<div class="fsec">${field(`${ic('link')}공고 주소`, '<span class="url-val"></span><i class="caret"></i>', 'url')}</div>
+           <div class="ffoot"><p>지금 보이는 공고 내용을 저장해요. 웹페이지가 바뀌어도 남아요.</p>
+           ${sh.phase === 'loading' ? '<p class="busy"><span class="spin"></span>공고를 불러오는 중…</p>' : ''}</div>`;
+      $('.sh-lead').textContent = { input: '직접 입력하기', loading: '', loaded: '주소 다시 입력' }[sh.phase];
+      $('.sheet').dataset.phase = sh.phase;
+      shown.phase = sh.phase;
+    }
+    const url = $('.url-val');
+    if (url) url.textContent = sh.url;
+    const prime = $('.sbtn.prime');
+    prime.textContent = sh.phase === 'loaded' ? '공고 추가' : '불러오기';
+    prime.dataset.at = sh.phase === 'loaded' ? 'sheet:add' : 'sheet:load';
+    prime.classList.toggle('off', sh.phase !== 'loaded' && (!sh.url || sh.phase === 'loading'));
+  }
+
   /* Scale: the window is 1512x949 points, drawn at the frame's width. Each page fits its pane's width. */
   new ResizeObserver(() => app.style.setProperty('--k', frame.clientWidth / 1512)).observe(frame);
   const paperRO = new ResizeObserver((entries) => entries.forEach(({ target: p }) => {
@@ -386,10 +457,12 @@ const SHOWCASE = {
     const a = app.getBoundingClientRect();
     const r = el.getBoundingClientRect();
     const k = a.width / 1512;
-    return { x: (r.left - a.left) / k + Math.min(r.width / k / 2, 70), y: (r.top - a.top + r.height / 2) / k };
+    const dx = el.matches('.posting') ? r.width / k / 2 : Math.min(r.width / k / 2, 70);
+    return { x: (r.left - a.left) / k + dx, y: (r.top - a.top + r.height / 2) / k };
   }
-  async function click(at, token) {
-    const el = $(`.rows [data-at="${at}"], .tb [data-at="${at}"]`);
+  // Copies of rows under the lens carry no data-at, so this finds the real control. `scroll` aims at a pane without pressing.
+  async function click(at, token, { apply = true, press = true } = {}) {
+    const el = $(`[data-at="${at}"]`);
     if (!el) return;
     const p = pointAt(el);
     pointer.style.setProperty('--move', SHOWCASE.move + 'ms');
@@ -398,22 +471,21 @@ const SHOWCASE = {
     pointer.classList.add('on');
     await wait(SHOWCASE.move);
     if (token !== playing) return;
-    pointer.classList.add('down');
-    await wait(SHOWCASE.press);
-    if (token !== playing) return;
-    state = act(state, at);
-    render();
-    setTimeout(() => pointer.classList.remove('down'), 300);
+    if (press) {
+      pointer.classList.add('down');
+      await wait(SHOWCASE.press);
+      if (token !== playing) return;
+      setTimeout(() => pointer.classList.remove('down'), 300);
+    }
+    if (apply) { state = act(state, at); render(); }
   }
 
   /* Player */
   let playing = 0;
-  let scene = -1;
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
   async function playScene(i) {
     const token = ++playing;
-    scene = i;
     setCaption(i);
     app.removeAttribute('data-live');
     if (reduce.matches) {
@@ -427,7 +499,16 @@ const SHOWCASE = {
     await wait(SHOWCASE.lead);
     for (const step of SHOWCASE.scenes[i].steps) {
       if (token !== playing) return;
-      await click(step.at, token);
+      await click(step.at, token, { apply: !step.type, press: !step.scroll });
+      if (step.type) {
+        for (let n = 1; n <= step.type.length; n++) {
+          if (token !== playing) return;
+          state.sheet.url = step.type.slice(0, n);
+          renderSheet();
+          await wait(SHOWCASE.key);
+        }
+        state = act(state, step.at);
+      }
       await wait(step.hold ?? SHOWCASE.hold);
     }
     if (token === playing) app.setAttribute('data-live', '');
@@ -437,6 +518,7 @@ const SHOWCASE = {
   app.addEventListener('click', (e) => {
     const el = e.target.closest('[data-at]');
     if (!el || !app.hasAttribute('data-live') || el.closest('.lcopy')) return;
+    if (state.sheet && !el.closest('.sheet')) return; // the sheet is modal
     pointer.classList.remove('on');
     state = act(state, el.dataset.at);
     render();
@@ -465,67 +547,21 @@ const SHOWCASE = {
     }, 160);
   }
 
-  const sticky = matchMedia('(min-width: 761px)');
-  const progressScene = () => {
-    const rect = showcase.getBoundingClientRect();
-    const total = showcase.offsetHeight - innerHeight;
-    const p = Math.min(1, Math.max(0, -rect.top / total));
-    return Math.min(SHOWCASE.scenes.length - 1, Math.floor(p * SHOWCASE.scenes.length));
-  };
+  tabButtons.forEach((b, i) => b.addEventListener('click', () => playScene(i)));
 
-  // Desktop: the window sticks and each scroll step plays one scene.
-  // Scroll events already arrive once per frame, and this only reads two rects.
-  function onScroll() {
-    if (!sticky.matches) return;
-    // Above the showcase: back to the empty window, so scene one plays again on the way down.
-    if (showcase.getBoundingClientRect().top > innerHeight * 0.3) {
-      if (scene !== -1) { playing++; scene = -1; state = clone(INITIAL); render(true); pointer.classList.remove('on'); }
-      return;
-    }
-    const i = progressScene();
-    if (i !== scene) playScene(i);
-  }
-
-  // Phones: no sticky scroll; the scenes play in a loop while the window is on screen.
-  let visible = false;
-  let loopStarts = 0;
-
-  async function runLoop(from) {
-    const mine = ++loopStarts;
-    for (let i = from, first = true; ; i = (i + 1) % SHOWCASE.scenes.length, first = false) {
-      if (!first && i === 0) await wait(SHOWCASE.loopRest);
-      if (mine !== loopStarts || !visible || sticky.matches) return;
-      await playScene(i);
-      if (mine !== loopStarts || reduce.matches) return;
-    }
-  }
-
-  tabButtons.forEach((b, i) => b.addEventListener('click', () => {
-    if (sticky.matches) {
-      const total = showcase.offsetHeight - innerHeight;
-      scrollTo({ top: showcase.offsetTop + total * (i + 0.5) / SHOWCASE.scenes.length, behavior: reduce.matches ? 'auto' : 'smooth' });
-    } else {
-      runLoop(i);
-    }
-  }));
-
-  new IntersectionObserver(([e]) => {
-    visible = e.isIntersecting;
-    if (sticky.matches) return;
-    if (visible) runLoop(Math.max(0, scene === SHOWCASE.scenes.length - 1 ? 0 : scene));
-    else { loopStarts++; playing++; }
-  }, { threshold: 0.35 }).observe(frame);
-
-  addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', onScroll);
-  sticky.addEventListener('change', () => { scene = -1; loopStarts++; playing++; if (sticky.matches) onScroll(); else if (visible) runLoop(0); });
+  // Scene one plays once when the window first comes into view; after that only the tabs play scenes.
+  const firstView = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    firstView.disconnect();
+    if (!playing) playScene(0);
+  }, { threshold: 0.35 });
+  firstView.observe(frame);
 
   /* First paint, then real notes and diff counts when served over HTTP. */
   function counts() { $$('[data-count]').forEach((el) => { el.textContent = `${el.dataset.count === 'ins' ? '추가' : '삭제'} ${diffCount[el.dataset.count]}곳`; }); }
   counts();
   render(true);
   setCaption(0);
-  onScroll();
 
   Promise.all(Object.keys(NOTES).map((d) => fetch(`${DOCS}${d}/notes.json`).then((r) => (r.ok ? r.json() : Promise.reject())).then((n) => { NOTES[d] = n; })))
     .then(() => {

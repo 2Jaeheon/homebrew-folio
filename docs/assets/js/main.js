@@ -80,6 +80,11 @@ function selectTab(tabs, index) {
     if (b.id) b.tabIndex = i === index ? 0 : -1;
   });
   placeLens(tabs);
+  // A tab row wider than the screen scrolls inside itself to keep the selection in view.
+  const sel = tabs.querySelectorAll('[role="tab"]')[index];
+  if (sel && tabs.scrollWidth > tabs.clientWidth) {
+    tabs.scrollTo({ left: sel.offsetLeft - (tabs.clientWidth - sel.offsetWidth) / 2, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+  }
 }
 const allTabs = document.querySelectorAll('.lens-tabs');
 addEventListener('resize', () => allTabs.forEach(placeLens));

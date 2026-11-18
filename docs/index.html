@@ -39,15 +39,18 @@
     <p class="hero-sub">이력서와 포트폴리오를 내 Mac에 버전별로 보관하고, 공고마다 맞춘 사본을 따로 관리하는 앱.</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="https://github.com/MODUGGAGI/homebrew-folio/releases/latest/download/Folio.zip">Folio 내려받기</a>
-      <div class="brew">
-        <code>brew install --cask moduggagi/folio/folio</code>
-        <button class="copy" type="button" data-copy="brew install --cask moduggagi/folio/folio" aria-label="설치 명령 복사"><span>복사</span></button>
+      <div class="brew multi">
+        <code>brew tap moduggagi/folio
+brew trust moduggagi/folio
+brew install --cask folio</code>
+        <button class="copy" type="button" data-copy="brew tap moduggagi/folio &amp;&amp; brew trust moduggagi/folio &amp;&amp; brew install --cask folio" aria-label="설치 명령 세 줄 복사"><span>복사</span></button>
       </div>
     </div>
     <ul class="chips" aria-label="요구 사항">
       <li>macOS 26 이상</li>
       <li>Apple Silicon과 Intel 모두 지원</li>
       <li>Apple 공증(Developer ID 서명) 완료</li>
+      <li>자동 업데이트</li>
     </ul>
   </div>
 
@@ -67,13 +70,11 @@
 </section>
 
 <section class="showcase" id="showcase" aria-labelledby="showcase-title">
-  <div class="showcase-sticky">
-    <h2 class="section-title" id="showcase-title" data-rise>한 번 쓴 이력서를, 공고마다 맞춰서</h2>
-    <div class="lens-tabs scene-tabs" role="tablist" aria-label="장면 고르기"><span class="lens" aria-hidden="true"></span></div>
-    <!-- The Folio window rebuilt in HTML (assets/js/app-demo.js); the captions below say what it shows. -->
-    <div class="app-frame" id="app-demo" aria-hidden="true"></div>
-    <p class="caption" aria-live="polite"></p>
-  </div>
+  <h2 class="section-title" id="showcase-title" data-rise>한 번 쓴 이력서를, 공고마다 맞춰서</h2>
+  <div class="lens-tabs scene-tabs" role="tablist" aria-label="장면 고르기"><span class="lens" aria-hidden="true"></span></div>
+  <!-- The Folio window rebuilt in HTML (assets/js/app-demo.js); the captions below say what it shows. -->
+  <div class="app-frame" id="app-demo" aria-hidden="true"></div>
+  <p class="caption" aria-live="polite"></p>
 </section>
 
 <figure class="real-shot">
@@ -156,19 +157,22 @@
     <ol class="steps">
       <li><h3>터미널 열기</h3><p>Spotlight(⌘ 스페이스)에서 "터미널"을 찾아 엽니다.</p></li>
       <li><h3>명령 붙여 넣기</h3>
-        <div class="brew">
-          <code>brew install --cask moduggagi/folio/folio</code>
-          <button class="copy" type="button" data-copy="brew install --cask moduggagi/folio/folio" aria-label="설치 명령 복사"><span>복사</span></button>
+        <p>세 줄을 한 번에 붙여 넣으면 됩니다. 가운데 <code>brew trust</code>는 이 저장소에서 받은 앱을 믿고 설치하겠다는 확인입니다.</p>
+        <div class="brew multi">
+        <code>brew tap moduggagi/folio
+brew trust moduggagi/folio
+brew install --cask folio</code>
+        <button class="copy" type="button" data-copy="brew tap moduggagi/folio &amp;&amp; brew trust moduggagi/folio &amp;&amp; brew install --cask folio" aria-label="설치 명령 세 줄 복사"><span>복사</span></button>
         </div>
       </li>
-      <li><h3>Folio 열기</h3><p>응용 프로그램 폴더에서 Folio를 엽니다. 업데이트는 <code>brew upgrade --cask folio</code>.</p></li>
+      <li><h3>Folio 열기</h3><p>응용 프로그램 폴더에서 Folio를 엽니다. 새 버전이 나오면 앱이 알아서 알려 주고 업데이트합니다.</p></li>
     </ol>
   </div>
   <div class="pane" id="pane-zip" role="tabpanel" aria-labelledby="tab-zip" hidden>
     <ol class="steps">
       <li><h3>내려받기</h3><p><a class="btn btn-primary" href="https://github.com/MODUGGAGI/homebrew-folio/releases/latest/download/Folio.zip">Folio.zip 내려받기</a></p></li>
       <li><h3>응용 프로그램으로 옮기기</h3><p>압축을 풀고 Folio.app을 응용 프로그램 폴더로 끌어다 놓습니다.</p></li>
-      <li><h3>Folio 열기</h3><p>Apple 공증을 마친 앱이라 바로 열 수 있습니다. 처음 열 때 묻는 창이 뜨면 열기를 누릅니다.</p></li>
+      <li><h3>Folio 열기</h3><p>Apple 공증을 마친 앱이라 바로 열 수 있습니다. 처음 열 때 묻는 창이 뜨면 열기를 누릅니다. 이후 업데이트는 앱이 알아서 합니다.</p></li>
     </ol>
   </div>
   <p class="req">macOS 26 이상. Apple Silicon과 Intel 모두 지원.</p>

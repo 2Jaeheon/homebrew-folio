@@ -71,42 +71,53 @@
 
 <section class="lineage" id="lineage" aria-labelledby="lineage-title">
   <h2 class="section-title" id="lineage-title" data-rise>이력서는 하나, 공고마다 갈래로</h2>
-  <p class="lineage-sub">고칠 때마다 버전이 쌓이고, 공고마다 갈라진 사본은 따로 다듬습니다. 내 이력서는 그대로입니다.</p>
+  <p class="lineage-sub">내 이력서는 계속 버전을 쌓아 가고, 공고마다 갈라진 사본은 그 회사에 맞게 따로 다듬습니다.</p>
   <!-- Desktop: rows left to right. Elements animate in by --d (delay) and --t (draw time); see main.js. -->
-  <svg class="lineage-wide" viewBox="0 0 920 270" role="img" aria-label="내 이력서 v1부터 v4까지. v4에서 당근용 v1, 네이버웹툰용 v1과 v2가 갈라져 나옴.">
-    <text class="row" x="0" y="76">내 이력서</text>
-    <path class="ln main" pathLength="1" d="M200 70 H590" style="--t:.8s"/>
-    <g class="nd main" style="--d:0s"><circle cx="200" cy="70" r="6"/><text x="200" y="102">v1</text></g>
-    <g class="nd main" style="--d:.12s"><circle cx="330" cy="70" r="6"/><text x="330" y="102">v2</text></g>
-    <g class="nd main" style="--d:.24s"><circle cx="460" cy="70" r="6"/><text x="460" y="102">v3</text></g>
-    <g class="nd main" style="--d:.36s"><circle cx="590" cy="70" r="7"/><text x="590" y="102">v4</text></g>
-    <text class="cap fd" x="614" y="122" style="--d:.8s">이력서 v4에서 시작</text>
-    <path class="ln dg" pathLength="1" d="M590 70 C590 130 610 160 670 160 H800" style="--d:.85s"/>
-    <path class="ln wt" pathLength="1" d="M590 70 C590 190 610 230 670 230 H880" style="--d:.95s"/>
-    <g class="fd" style="--d:1.05s"><image href="assets/app/daangn.png" x="680" y="133" width="18" height="18"/><text class="br" x="704" y="148">당근용</text></g>
-    <g class="fd" style="--d:1.15s"><image href="assets/app/webtoon.png" x="680" y="203" width="18" height="18"/><text class="br" x="704" y="218">네이버웹툰용</text></g>
-    <g class="nd dg" style="--d:1.45s"><circle cx="800" cy="160" r="6"/><text x="800" y="192">v1</text></g>
-    <g class="nd wt" style="--d:1.57s"><circle cx="800" cy="230" r="6"/><text x="800" y="262">v1</text></g>
-    <g class="nd wt" style="--d:1.69s"><circle cx="880" cy="230" r="6"/><text x="880" y="262">v2</text></g>
+  <svg class="lineage-wide" viewBox="0 0 920 280" role="img" aria-label="내 이력서는 v1부터 v5로 계속 이어진다. v4에서 A 회사용 v1, B 회사용 v1과 v2가 갈라져 나온다.">
+    <defs>
+      <!-- the trunk keeps going: solid up to v5, then fades out to the right -->
+      <linearGradient id="trunk" gradientUnits="userSpaceOnUse" x1="200" y1="0" x2="910" y2="0">
+        <stop offset="0" stop-color="#8EB1EE"/><stop offset=".74" stop-color="#8EB1EE"/><stop offset="1" stop-color="#8EB1EE" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <text class="row" x="0" y="96">내 이력서</text>
+    <path class="ln main" pathLength="1" d="M200 90 H910" style="--t:1s;stroke:url(#trunk)"/>
+    <g class="nd main" style="--d:0s"><circle cx="200" cy="90" r="6"/><text x="200" y="68">v1</text></g>
+    <g class="nd main" style="--d:.12s"><circle cx="320" cy="90" r="6"/><text x="320" y="68">v2</text></g>
+    <g class="nd main" style="--d:.24s"><circle cx="440" cy="90" r="6"/><text x="440" y="68">v3</text></g>
+    <g class="nd main" style="--d:.36s"><circle cx="560" cy="90" r="7"/><text x="560" y="68">v4</text></g>
+    <g class="nd main" style="--d:.48s"><circle cx="680" cy="90" r="6"/><text x="680" y="68">v5</text></g>
+    <text class="cap fd" x="584" y="128" style="--d:.8s">이력서 v4에서 시작</text>
+    <path class="ln dg" pathLength="1" d="M560 90 C560 150 580 180 640 180 H760" style="--d:.85s"/>
+    <path class="ln wt" pathLength="1" d="M560 90 C560 210 580 250 640 250 H860" style="--d:.95s"/>
+    <text class="br fd" x="648" y="168" style="--d:1.05s">A 회사</text>
+    <text class="br fd" x="648" y="238" style="--d:1.15s">B 회사</text>
+    <g class="nd dg" style="--d:1.45s"><circle cx="760" cy="180" r="6"/><text x="760" y="158">v1</text></g>
+    <g class="nd wt" style="--d:1.57s"><circle cx="760" cy="250" r="6"/><text x="760" y="228">v1</text></g>
+    <g class="nd wt" style="--d:1.69s"><circle cx="860" cy="250" r="6"/><text x="860" y="228">v2</text></g>
   </svg>
   <!-- Narrow screens: the same tree top to bottom, so labels stay readable. -->
-  <svg class="lineage-tall" viewBox="0 0 340 500" aria-hidden="true">
+  <svg class="lineage-tall" viewBox="0 0 340 470" aria-hidden="true">
+    <defs>
+      <linearGradient id="trunk-tall" gradientUnits="userSpaceOnUse" x1="0" y1="50" x2="0" y2="400">
+        <stop offset="0" stop-color="#8EB1EE"/><stop offset=".7" stop-color="#8EB1EE"/><stop offset="1" stop-color="#8EB1EE" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
     <text class="row" x="20" y="24">내 이력서</text>
-    <path class="ln main" pathLength="1" d="M40 50 V260" style="--t:.8s"/>
-    <g class="nd main" style="--d:0s"><circle cx="40" cy="50" r="6"/><text class="side" x="60" y="55">v1</text></g>
-    <g class="nd main" style="--d:.12s"><circle cx="40" cy="120" r="6"/><text class="side" x="60" y="125">v2</text></g>
-    <g class="nd main" style="--d:.24s"><circle cx="40" cy="190" r="6"/><text class="side" x="60" y="195">v3</text></g>
-    <g class="nd main" style="--d:.36s"><circle cx="40" cy="260" r="7"/><text class="side" x="60" y="265">v4</text></g>
-    <text class="cap fd" x="92" y="265" style="--d:.8s">이력서 v4에서 시작</text>
-    <path class="ln dg" pathLength="1" d="M40 260 C40 305 120 295 120 330" style="--d:.85s;--t:.45s"/>
-    <path class="ln wt" pathLength="1" d="M40 260 C40 315 250 295 250 330" style="--d:.95s;--t:.45s"/>
-    <g class="fd" style="--d:1.05s"><image href="assets/app/daangn.png" x="84" y="340" width="18" height="18"/><text class="br" x="106" y="355">당근용</text></g>
-    <g class="fd" style="--d:1.15s"><image href="assets/app/webtoon.png" x="194" y="340" width="18" height="18"/><text class="br" x="216" y="355">네이버웹툰용</text></g>
-    <path class="ln dg" pathLength="1" d="M120 370 V410" style="--d:1.25s;--t:.3s"/>
-    <path class="ln wt" pathLength="1" d="M250 370 V480" style="--d:1.3s;--t:.4s"/>
-    <g class="nd dg" style="--d:1.45s"><circle cx="120" cy="410" r="6"/><text class="side" x="136" y="415">v1</text></g>
-    <g class="nd wt" style="--d:1.57s"><circle cx="250" cy="410" r="6"/><text class="side" x="266" y="415">v1</text></g>
-    <g class="nd wt" style="--d:1.69s"><circle cx="250" cy="480" r="6"/><text class="side" x="266" y="485">v2</text></g>
+    <path class="ln main" pathLength="1" d="M60 50 V400" style="--t:1s;stroke:url(#trunk-tall)"/>
+    <g class="nd main" style="--d:0s"><circle cx="60" cy="50" r="6"/><text class="side-l" x="44" y="55">v1</text></g>
+    <g class="nd main" style="--d:.12s"><circle cx="60" cy="110" r="6"/><text class="side-l" x="44" y="115">v2</text></g>
+    <g class="nd main" style="--d:.24s"><circle cx="60" cy="170" r="6"/><text class="side-l" x="44" y="175">v3</text></g>
+    <g class="nd main" style="--d:.36s"><circle cx="60" cy="230" r="7"/><text class="side-l" x="44" y="235">v4</text></g>
+    <g class="nd main" style="--d:.48s"><circle cx="60" cy="290" r="6"/><text class="side-l" x="44" y="295">v5</text></g>
+    <text class="cap fd" x="84" y="222" style="--d:.8s">이력서 v4에서 시작</text>
+    <path class="ln dg" pathLength="1" d="M60 230 C60 270 150 260 150 300 V350" style="--d:.85s;--t:.5s"/>
+    <path class="ln wt" pathLength="1" d="M60 230 C60 280 270 260 270 300 V430" style="--d:.95s;--t:.6s"/>
+    <text class="br fd" x="162" y="322" style="--d:1.05s">A 회사</text>
+    <text class="br fd" x="282" y="322" style="--d:1.15s">B 회사</text>
+    <g class="nd dg" style="--d:1.45s"><circle cx="150" cy="350" r="6"/><text class="side" x="166" y="355">v1</text></g>
+    <g class="nd wt" style="--d:1.57s"><circle cx="270" cy="350" r="6"/><text class="side" x="286" y="355">v1</text></g>
+    <g class="nd wt" style="--d:1.69s"><circle cx="270" cy="430" r="6"/><text class="side" x="286" y="435">v2</text></g>
   </svg>
 </section>
 

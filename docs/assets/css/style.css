@@ -398,3 +398,4 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .lineage.js.in .ln { stroke-dashoffset: 0; transition: stroke-dashoffset var(--t, .7s) cubic-bezier(.32, .72, 0, 1) var(--d, 0s); }
 .lineage.js.in .nd { opacity: 1; transform: none; transition: opacity .3s ease-out var(--d), transform .45s cubic-bezier(.34, 1.32, .64, 1) var(--d); }
 .lineage.js.in .fd { opacity: 1; transition: opacity .35s ease-out var(--d); }
+.lineage text.side-l { text-anchor: end; }

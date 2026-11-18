@@ -127,10 +127,10 @@ if (chat) {
       chatObserver.disconnect();
       chat.classList.add('typing');
       const text = typed.dataset.text;
-      for (let n = 1; n <= text.length; n++) setTimeout(() => { typed.textContent = text.slice(0, n); }, n * 55);
-      const done = text.length * 55;
+      for (let n = 1; n <= text.length; n++) setTimeout(() => { typed.textContent = text.slice(0, n); }, n * 40);
+      const done = text.length * 40;
       setTimeout(() => chat.classList.remove('typing'), done);
-      steps.forEach((el, k) => setTimeout(() => el.classList.add('shown'), done + 500 + k * 550));
+      steps.forEach((el, k) => setTimeout(() => el.classList.add('shown'), done + 250 + k * 300));
     }, { threshold: 0.5 });
     chatObserver.observe(chat);
   }

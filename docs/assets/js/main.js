@@ -65,8 +65,21 @@ document.querySelectorAll('.copy').forEach((btn) => {
     await copyText(btn.dataset.copy);
     btn.classList.add('done');
     btn.setAttribute('aria-label', '설치 명령 복사됨');
+    // A small "copied" note next to the button; made on first use and reused after.
+    const bar = btn.closest('.cmdbar, .term-bar');
+    let tip = bar && bar.querySelector('.copy-tip');
+    if (bar && !tip) {
+      tip = document.createElement('span');
+      tip.className = 'copy-tip';
+      tip.setAttribute('aria-hidden', 'true');
+      tip.textContent = '복사됐어요';
+      bar.append(tip);
+      tip.getBoundingClientRect(); // so the first show still fades in
+    }
+    if (tip) tip.classList.add('on');
     clearTimeout(timer);
     timer = setTimeout(() => {
+      if (tip) tip.classList.remove('on');
       btn.classList.remove('done');
       btn.setAttribute('aria-label', '설치 명령 복사');
     }, 1800);

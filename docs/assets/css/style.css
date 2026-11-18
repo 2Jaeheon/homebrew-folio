@@ -515,3 +515,17 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .foot-links li { margin: 0; }
 .foot-links .mail { color: var(--pale); margin-left: 6px; }
 @media (max-width: 760px) { .foot-links .pop-card { left: 0; right: auto; } }
+
+/* "Copied" note: above the hero copy button, left of the button inside the terminal title bar. */
+.cmdbar { position: relative; }
+.copy-tip {
+  position: absolute; z-index: 6; pointer-events: none; white-space: nowrap;
+  padding: 5px 10px; border-radius: 8px; font-size: 12.5px; font-weight: 500; color: #fff;
+  background: #2b2b31; border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+  opacity: 0; transition: opacity var(--state), transform var(--state);
+}
+.cmdbar .copy-tip { right: 0; bottom: calc(100% + 10px); transform: translateY(4px); }
+.term-bar .copy-tip { right: 40px; top: 50%; padding: 2px 8px; font-size: 12px; transform: translate(4px, -50%); }
+.cmdbar .copy-tip.on { opacity: 1; transform: none; }
+.term-bar .copy-tip.on { opacity: 1; transform: translate(0, -50%); }
+@media (prefers-reduced-motion: reduce) { .copy-tip { transition: none; } }

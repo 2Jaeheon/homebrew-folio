@@ -7,17 +7,25 @@
 #   DEVELOPER_ID_P12_PASSWORD  password of that .p12
 #   ASC_KEY_P8                 App Store Connect team API key (.p8 text)
 #   ASC_KEY_ID, ASC_ISSUER_ID  that key's id and issuer id
+#   (the workflow signs the update for Sparkle separately with SPARKLE_ED_PRIVATE_KEY)
 # SIGN_IDENTITY=- signs ad hoc and skips the keychain and notarization (local dry run).
 set -euo pipefail
 app="${1:?usage: $0 <Folio.app> <version>}"
 version="${2:?usage: $0 <Folio.app> <version>}"
 bundle_id=io.github.moduggagi.folio
+# Sparkle reads updates from the latest release; the public key checks they were signed with SPARKLE_ED_PRIVATE_KEY.
+feed=https://github.com/MODUGGAGI/homebrew-folio/releases/latest/download/appcast.xml
+ed_public_key=4pTKp7+0XM6oULgZ9evC19nlYVt+BvMKqPXcjQJ8+KU=
 tmp="${RUNNER_TEMP:-$(mktemp -d)}"
 
 plist="$app/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier $bundle_id" \
     -c "Set :CFBundleShortVersionString $version" \
-    -c "Set :CFBundleVersion $version" "$plist"
+    -c "Set :CFBundleVersion $version" \
+    -c "Add :SUFeedURL string $feed" \
+    -c "Add :SUPublicEDKey string $ed_public_key" \
+    -c "Add :SUEnableAutomaticChecks bool true" \
+    -c "Add :SUAutomaticallyUpdate bool true" "$plist"
 
 identity="${SIGN_IDENTITY:-}"
 if [[ -z "$identity" ]]; then
@@ -39,12 +47,25 @@ if [[ -z "$identity" ]]; then
     [[ -n "$identity" ]] || { echo "No Developer ID Application identity in the .p12" >&2; exit 1; }
 fi
 
-# Nested executables first, the app last. Signing never runs the code it signs.
+# Nested code first, the app last. Signing never runs the code it signs.
+# Hardened runtime only loads libraries from the same team; ad hoc has none, so the dry run leaves it off.
+flags=(--options runtime --timestamp)
+[[ "$identity" == - ]] && flags=()
+sign() { codesign --force "${flags[@]}" --sign "$identity" "$@"; }
+sparkle="$app/Contents/Frameworks/Sparkle.framework"
+if [[ -d "$sparkle" ]]; then
+    # Order from Sparkle's documentation; Downloader.xpc keeps its entitlements.
+    sign "$sparkle/Versions/B/XPCServices/Installer.xpc"
+    sign --preserve-metadata=entitlements "$sparkle/Versions/B/XPCServices/Downloader.xpc"
+    sign "$sparkle/Versions/B/Autoupdate"
+    sign "$sparkle/Versions/B/Updater.app"
+    sign "$sparkle"
+fi
 for bin in "$app"/Contents/MacOS/*; do
     [[ "$(basename "$bin")" == Folio ]] && continue
-    codesign --force --options runtime --timestamp --sign "$identity" "$bin"
+    sign "$bin"
 done
-codesign --force --options runtime --timestamp --sign "$identity" "$app"
+sign "$app"
 codesign --verify --strict --deep --verbose=2 "$app"
 
 zip=Folio.zip

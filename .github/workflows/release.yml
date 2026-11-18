@@ -66,13 +66,32 @@ jobs:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
         run: scripts/sign-and-notarize.sh Folio.app "${TAG#v}"
+      - name: Sign the update for Sparkle
+        env:
+          SPARKLE_ED_PRIVATE_KEY: ${{ secrets.SPARKLE_ED_PRIVATE_KEY }}
+        run: |
+          # Same version as the framework in folio's Package.swift; the checksum pins the download.
+          curl -fsSL -o "$RUNNER_TEMP/sparkle.tar.xz" https://github.com/sparkle-project/Sparkle/releases/download/2.10.1/Sparkle-2.10.1.tar.xz
+          echo "1a856d2a9edb8e628de88121d7be04cf0e2167f8641650b78fca00b14244cf27  $RUNNER_TEMP/sparkle.tar.xz" | shasum -a 256 -c
+          mkdir "$RUNNER_TEMP/sparkle" && tar -xJf "$RUNNER_TEMP/sparkle.tar.xz" -C "$RUNNER_TEMP/sparkle"
+          attrs="$(printf '%s' "$SPARKLE_ED_PRIVATE_KEY" | "$RUNNER_TEMP/sparkle/bin/sign_update" --ed-key-file - Folio.zip)"
+          scripts/write-appcast.sh "${TAG#v}" "$attrs" > appcast.xml
+          cat appcast.xml
+      # Lets a test run (publish off) be downloaded and opened on a Mac.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: signed
+          path: |
+            Folio.zip
+            appcast.xml
+          retention-days: 3
       - name: Publish release and cask
         if: inputs.publish
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           version="${TAG#v}"
-          gh release create "$TAG" Folio.zip --title "Folio $version" --notes "brew upgrade --cask folio"
+          gh release create "$TAG" Folio.zip appcast.xml --title "Folio $version" --notes "앱이 자동으로 업데이트합니다. brew로 설치했다면 brew upgrade --cask folio도 됩니다."
           scripts/write-cask.sh "$version" "$(shasum -a 256 Folio.zip | cut -d' ' -f1)" > Casks/folio.rb
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

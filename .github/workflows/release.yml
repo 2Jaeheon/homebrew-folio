@@ -92,6 +92,7 @@ jobs:
         run: |
           version="${TAG#v}"
           gh release create "$TAG" Folio.zip appcast.xml --title "Folio $version" --notes "앱이 자동으로 업데이트합니다. brew로 설치했다면 brew upgrade --cask folio도 됩니다."
+          mkdir -p Casks
           scripts/write-cask.sh "$version" "$(shasum -a 256 Folio.zip | cut -d' ' -f1)" > Casks/folio.rb
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

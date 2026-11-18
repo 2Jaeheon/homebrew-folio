@@ -146,10 +146,11 @@ if (lineage && !reduceMotion.matches) {
     lineageObserver.disconnect();
     lineage.classList.add('in');
     // Once the tree is drawn, light keeps flowing along the lines and the newest version breathes.
-    setTimeout(() => {
-      lineage.classList.add('flowing');
-      lineage.querySelectorAll('.flow animate, .flow animateMotion').forEach((anim) => anim.beginElement());
-    }, 3500);
+    // Branch lights start as soon as the badges are up; the trunk light and the v5 ring start as v5 appears,
+    // so there is no pause between the drawing and the light.
+    const start = (...kinds) => kinds.forEach((k) => lineage.querySelectorAll(`.flow.${k} animate, .flow.${k} animateMotion`).forEach((anim) => anim.beginElement()));
+    setTimeout(() => start('dg', 'wt'), 2050);
+    setTimeout(() => { lineage.classList.add('flowing'); start('main'); }, 2700);
   }, { threshold: 0.4 });
   lineageObserver.observe(lineage);
 }

@@ -1,0 +1,16 @@
+{
+  "name": "folio-site-metal",
+  "private": true,
+  "description": "Builds site/assets/js/metal.js: the metal-fx ring around the landing page copy buttons.",
+  "scripts": {
+    "build": "esbuild src/metal.jsx --bundle --minify --format=iife --target=es2020 --define:process.env.NODE_ENV='\"production\"' --outfile=../../docs/assets/js/metal.js --banner:js=\"/*! metal-fx (MIT, Jakub Antalik) incl. Paper Shaders liquidMetal (Apache-2.0, Paper Design, Inc.); React, ReactDOM (MIT, Meta). Built from landing/metal. */\""
+  },
+  "dependencies": {
+    "metal-fx": "2.0.11",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.2"
+  }
+}

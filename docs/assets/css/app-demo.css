@@ -133,6 +133,7 @@
 .rise { display: inline-flex; white-space: pre; }
 .rise i { font-style: normal; display: inline-block; animation: appLetterIn .35s var(--letter) both; animation-delay: calc(var(--i) * .06s); }
 .rise.out { animation: appFadeOut .1s ease-out forwards; }
+.rise.settled i { animation: none; }
 @keyframes appLetterIn { from { opacity: 0; transform: translateY(7px); filter: blur(4px); } }
 @keyframes appFadeOut { to { opacity: 0; } }
 

@@ -410,13 +410,17 @@ const SHOWCASE = {
     $('.tb-title span').textContent = sub;
     $('.base-cap').hidden = !s.comparing;
     $('.picker').hidden = !s.comparing;
+    const toggle = $('.toggle');
+    // Letters rise only when the words change. A button that appears (or comes back, which restarts CSS
+    // animations) shows its words at once.
+    const appearing = $('.cmp-cap').hidden && view === 'doc';
     $('.cmp-cap').hidden = view !== 'doc';
     $('.pdf-cap').hidden = view !== 'doc';
     $('.web-cap').hidden = view !== 'posting';
-    const toggle = $('.toggle');
     toggle.classList.toggle('on', s.comparing);
     toggle.classList.toggle('off', view === 'doc' && !canCompare(s));
     rise($('.label', toggle), s.comparing ? '비교 끄기' : '이전 버전과 비교');
+    if (appearing) $$('.rise', toggle).forEach((r) => r.classList.add('settled'));
     if (s.comparing) {
       const on = $(`.picker [data-mode="${s.mode}"]`);
       $$('.picker .btn-in').forEach((b) => b.classList.toggle('on', b === on));

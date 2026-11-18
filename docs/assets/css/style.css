@@ -334,3 +334,8 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .term-bar .copy.metal svg { width: 13px; height: 13px; }
 @keyframes ringTurn { to { --a: 360deg; } }
 @media (prefers-reduced-motion: reduce) { .copy.metal, .copy.metal::before, .copy.metal::after { animation: none; } }
+/* With WebGL2, assets/js/metal.js wraps each copy button in the real metal-fx ring and adds .fx. */
+.metal-slot, .metal-host { display: inline-flex; flex: none; }
+.term-bar .metal-slot { margin-left: auto; }
+.copy.metal.fx { animation: none; }
+.copy.metal.fx::before, .copy.metal.fx::after { content: none; }

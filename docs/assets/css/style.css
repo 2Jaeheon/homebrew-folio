@@ -204,7 +204,7 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .cl-ai p { margin: 0; line-height: 1.6; }
 .spark { flex: none; width: 18px; height: 18px; margin-top: 3px; fill: #c9c6bc; }
 .chat-claude .result {
-  display: flex; gap: 12px; align-items: center; margin-left: 28px; padding: 12px 14px; border-radius: 12px;
+  display: flex; gap: 12px; align-items: center; margin-left: 0; padding: 12px 14px; border-radius: 12px;
   background: #30302e; border: 1px solid rgba(255, 255, 255, .1);
 }
 .result img { flex: none; border-radius: 9px; }
@@ -474,7 +474,7 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .steps .btn-quiet:hover { background: rgba(47, 110, 224, .24); color: #fff; }
 .steps .btn-quiet svg { width: 14px; height: 14px; }
 /* The result card hugs the left like the reply it belongs to, so it never reads as the user's message. */
-.chat-claude .result { width: fit-content; max-width: calc(100% - 28px); align-self: flex-start; padding-right: 22px; }
+.chat-claude .result { width: fit-content; max-width: 100%; align-self: flex-start; padding-right: 22px; }
 
 /* Header download button: hidden while the hero's install button is on screen, then fades in. */
 .nav-cta { min-height: 36px; padding: 0 14px; font-size: 14px; border-radius: 9px; gap: 6px;

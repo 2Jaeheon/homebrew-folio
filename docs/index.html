@@ -175,13 +175,8 @@
     </dl>
   </div>
   <div class="mcp-demo">
-    <div class="lens-tabs chat-tabs" role="tablist" aria-label="AI 앱 모양 고르기">
-      <span class="lens" aria-hidden="true"></span>
-      <button type="button" role="tab" id="tab-claude" aria-controls="chat-claude" aria-selected="true">Claude</button>
-      <button type="button" role="tab" id="tab-codex" aria-controls="chat-codex" aria-selected="false" tabindex="-1">Codex</button>
-    </div>
     <div class="chats">
-      <div class="chat chat-claude" id="chat-claude" role="tabpanel" aria-label="Claude와 나눈 대화 예시">
+      <div class="chat chat-claude" id="chat-claude" aria-label="AI 에이전트와 나눈 대화 예시">
         <div class="cl-thread">
           <p class="cl-me"><span class="typed" data-text="A회사 공고에 맞춰 이력서 다듬어 줘"></span></p>
           <ol class="cl-tools">
@@ -203,16 +198,6 @@
           </div>
         </div>
         <div class="cl-input" aria-hidden="true"><span>답장하기…</span><i><svg viewBox="0 0 16 16"><path d="M8 12.5v-9M4.5 7 8 3.5 11.5 7"/></svg></i></div>
-      </div>
-      <div class="chat chat-codex" id="chat-codex" role="tabpanel" aria-label="Codex와 나눈 대화 예시" hidden>
-        <div class="cx-banner">codex · folio-mcp 연결됨<br><span>~/Documents/Folio</span></div>
-        <p class="cx-me"><b aria-hidden="true">›</b><span class="typed" data-text="A회사 공고에 맞춰 이력서 다듬어 줘"></span></p>
-        <div class="step"><p class="cx-tool">• <code>folio_list</code>  공고와 이력서 찾음</p><p class="cx-out">└ 준비 중인 공고 1개, 이력서 v4</p></div>
-        <div class="step"><p class="cx-tool">• <code>folio_read_posting</code>  공고 본문 읽음</p><p class="cx-out">└ 대규모 트래픽, 서버 경험 우대</p></div>
-        <div class="step"><p class="cx-tool">• <code>folio_read_version</code>  이력서 v4 읽음</p><p class="cx-out">└ HTML, 1쪽</p></div>
-        <div class="step"><p class="cx-tool">• <code>folio_add_version</code>  공고 안에 새 버전 저장</p><p class="cx-out">└ 저장됨</p></div>
-        <p class="cx-ai step">공고가 찾는 대규모 트래픽 서버 경험을 앞으로 올리고, 관련 적은 항목은 줄였어요. Folio에서 이전 버전과 비교해 보세요.</p>
-        <p class="cx-done step"><b>✓</b> 공고용 이력서 v2 추가됨<br><span>A회사, 준비 중. 내 이력서는 바뀌지 않았어요.</span><i class="cx-cursor" aria-hidden="true"></i></p>
       </div>
     </div>
   </div>

@@ -295,3 +295,11 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .chips { justify-content: center; flex-wrap: nowrap; }
 .chips li { white-space: nowrap; }
 @media (max-width: 760px) { .chips { flex-wrap: wrap; } }
+
+/* Terminal colors: a bright prompt like starship, then command, subcommand, arguments and flags in their own colors. */
+.term-body .pr, .cmdbar .pr { color: #4c97f0; font-weight: 700; }
+.c-cmd { color: #8eb1ee; font-weight: 600; }
+.c-sub { color: #ececf0; }
+.c-arg { color: #7ee2a0; }
+.c-flag { color: #f5c26b; }
+.c-op { color: rgba(235, 235, 245, .4); }

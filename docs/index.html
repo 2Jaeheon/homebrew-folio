@@ -11,7 +11,8 @@
 <meta property="og:description" content="이력서와 포트폴리오를 내 Mac에 버전별로 보관하고, 공고마다 맞춘 사본을 따로 관리하는 macOS 앱.">
 <meta property="og:image" content="assets/shots/real.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/app-demo.css">
@@ -21,7 +22,7 @@
 
 <header class="nav">
   <a class="nav-brand" href="#top" aria-label="Folio 처음으로">
-    <img src="assets/favicon.svg" alt="" width="24" height="24"> Folio
+    <img src="assets/icon.png" alt="" width="24" height="24"> Folio
   </a>
   <nav aria-label="페이지 안내">
     <a href="#features">기능</a>
@@ -52,14 +53,18 @@
   <figure class="hero-mark" aria-hidden="true">
     <svg viewBox="0 0 1120 1024">
       <defs>
-        <linearGradient id="face" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B0CBF6"/><stop offset="1" stop-color="#8EB1EE"/></linearGradient>
+        <!-- The app icon's front F is translucent Liquid Glass (design/icon/Folio.icon: translucency .45, specular). -->
+        <linearGradient id="face" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B7D2FA" stop-opacity=".8"/><stop offset="1" stop-color="#8DB6F2" stop-opacity=".6"/></linearGradient>
+        <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".32"/><stop offset=".35" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".45" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity=".45"/></linearGradient>
+        <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".3" stop-color="#fff" stop-opacity="0"/></linearGradient>
         <path id="F" d="M200 370 C200 268 268 190 370 190 H818 Q848 190 843 220 L822 350 Q817 380 787 380 H410 Q380 380 380 410 V460 Q380 490 410 490 H675 Q705 490 700 520 L686 600 Q681 630 651 630 H410 Q380 630 380 660 V830 Q380 860 350 860 H230 Q200 860 200 830 Z"/>
       </defs>
       <!-- Same offsets as design/icon/folio-icon.svg: stack-3, stack-2, stack-1, face -->
-      <g class="layer" style="--i:0"><use href="#F" fill="#1E2A6E" transform="translate(48 38)"/><text x="930" y="262">v1</text></g>
-      <g class="layer" style="--i:1"><use href="#F" fill="#2A5FD0" transform="translate(8 4)"/><text x="930" y="226">v2</text></g>
-      <g class="layer" style="--i:2"><use href="#F" fill="#4C97F0" transform="translate(-32 -30)"/><text x="930" y="190">v3</text></g>
-      <g class="layer" style="--i:3"><use href="#F" fill="url(#face)" stroke="rgba(255,255,255,.55)" stroke-width="3" transform="translate(-72 -64)"/><text x="930" y="154">v4</text></g>
+      <g class="layer" style="--i:0"><use href="#F" fill="#1E2A6E" stroke="url(#edge)" stroke-width="3" transform="translate(48 38)"/><text x="930" y="262">v1</text></g>
+      <g class="layer" style="--i:1"><use href="#F" fill="#2A5FD0" stroke="url(#edge)" stroke-width="3" transform="translate(8 4)"/><text x="930" y="226">v2</text></g>
+      <g class="layer" style="--i:2"><use href="#F" fill="#4C97F0" stroke="url(#edge)" stroke-width="3" transform="translate(-32 -30)"/><text x="930" y="190">v3</text></g>
+      <g class="layer" style="--i:3"><g transform="translate(-72 -64)"><use href="#F" class="glass-face" fill="url(#face)"/><use href="#F" fill="url(#sheen)"/><use href="#F" fill="none" stroke="url(#rim)" stroke-width="5"/></g><text x="930" y="154">v4</text></g>
     </svg>
   </figure>
 </section>
@@ -132,7 +137,7 @@
     </ol>
     <p class="bubble ai">공고가 찾는 대규모 트래픽 서버 경험을 앞으로 올리고, 관련 적은 항목은 줄였어요. Folio에서 이전 버전과 비교해 보세요.</p>
     <div class="result">
-      <img src="assets/favicon.svg" alt="" width="36" height="36">
+      <img src="assets/icon.png" alt="" width="36" height="36">
       <div>
         <strong>공고용 이력서 v2 추가됨</strong>
         <span>NAVER WEBTOON, 준비 중. 내 문서는 바뀌지 않았습니다.</span>
@@ -183,7 +188,7 @@
 </main>
 
 <footer class="footer">
-  <p><img src="assets/favicon.svg" alt="" width="20" height="20"> Folio는 내 Mac에서만 동작하는 이력서와 포트폴리오 보관함입니다.</p>
+  <p><img src="assets/icon.png" alt="" width="20" height="20"> Folio는 내 Mac에서만 동작하는 이력서와 포트폴리오 보관함입니다.</p>
   <a href="https://github.com/MODUGGAGI/homebrew-folio">GitHub에서 보기</a>
 </footer>
 

@@ -59,7 +59,7 @@ const SHOWCASE = {
   /* Data: the demo library. Notes come from assets/docs/<doc>/notes.json; these are the fallback (file://). */
   const DOCS = 'assets/docs/';
   const NOTES = {
-    resume: ['첫 초안', '경력과 프로젝트 내용 채우기', '파란 디자인으로 새 단장', '성과 보충하고 강조 디자인으로'],
+    resume: ['첫 초안', '경력과 프로젝트 내용 채우기', '강조 디자인으로 새 단장', '차분하게 정리하고 성과 보충'],
     portfolio: ['사례 두 개로 첫 구성', '모아장 사례와 숫자 추가', '제목 바꾸고 위젯 지표 추가'],
     tailored: ['이력서 v4에서 서버 경험 중심으로 맞춤', '캐시 수치와 부하 테스트 추가'],
     daangn: ['이력서 v4에서 당근 공고에 맞춤'],
@@ -89,7 +89,7 @@ const SHOWCASE = {
   // What each comparable document compares: the previous version on the left, the marked-up diff on the right.
   const COMPARE = {
     resume: { doc: 'resume', from: 3, to: 4, old: 'resume/v3/index.html', diff: 'resume/diff-4.html', ins: 6, del: 1 },
-    webtoon: { doc: 'tailored', from: 1, to: 2, old: 'tailored/v1/index.html', diff: 'tailored/diff.html', ins: 5, del: 3 },
+    webtoon: { doc: 'tailored', from: 1, to: 2, old: 'tailored/v1/index.html', diff: 'tailored/diff.html', ins: 4, del: 1 },
   };
   const diffCount = { ins: 5, del: 3 };
   const compareKey = (s) => (s.sel === 'resume' && s.ver.resume === 4 ? 'resume' : s.sel === 'webtoon' && s.item === 2 ? 'webtoon' : null);

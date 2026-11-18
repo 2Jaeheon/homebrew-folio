@@ -91,7 +91,7 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 }
 .hero-title { font-size: clamp(40px, 5.6vw, 76px); line-height: 1.05; letter-spacing: -.045em; font-weight: 800; margin: 0 0 24px; }
 .hero-sub { font-size: clamp(18px, 1.6vw, 21px); color: var(--muted); max-width: 32em; margin: 0 0 36px; }
-.hero-actions { display: flex; flex-direction: column; align-items: center; gap: 18px; width: min(100%, 560px); margin-bottom: 28px; }
+.hero-actions { display: flex; flex-direction: column; align-items: center; gap: 18px; width: min(100%, 560px); margin-bottom: 0; }
 /* One-line install command: the whole chain stays on one line and scrolls sideways when the column is narrower. */
 .cmdbar {
   display: flex; align-items: center; gap: 8px; width: 100%; height: 52px; padding: 0 8px 0 18px; border-radius: 12px;
@@ -107,8 +107,6 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .cmdbar .pr { color: rgba(235, 235, 245, .45); user-select: none; -webkit-user-select: none; }
 .cmdbar .copy { margin-left: 0; width: 36px; height: 36px; border-radius: 8px; }
 .cmdbar .copy svg { width: 17px; height: 17px; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
-.chips li { font-size: 13px; color: var(--light); padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: rgba(30, 42, 110, .18); }
 
 .hero-mark { margin: 0; position: relative; }
 .hero-mark::before {
@@ -292,9 +290,6 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .hero-sub { margin-inline: auto; }
 .hero-actions { width: min(100%, 800px); }
 .hero-sub { max-width: 40em; }
-.chips { justify-content: center; flex-wrap: nowrap; }
-.chips li { white-space: nowrap; }
-@media (max-width: 760px) { .chips { flex-wrap: wrap; } }
 
 /* Terminal colors: a bright prompt like starship, then command, subcommand, arguments and flags in their own colors. */
 .term-body .pr, .cmdbar .pr { color: #4c97f0; font-weight: 700; }

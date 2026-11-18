@@ -50,16 +50,13 @@ async function copyText(text) {
   }
 }
 document.querySelectorAll('.copy').forEach((btn) => {
-  const label = btn.querySelector('span');
   let timer;
   btn.addEventListener('click', async () => {
     await copyText(btn.dataset.copy);
-    label.textContent = '복사됨';
     btn.classList.add('done');
     btn.setAttribute('aria-label', '설치 명령 복사됨');
     clearTimeout(timer);
     timer = setTimeout(() => {
-      label.textContent = '복사';
       btn.classList.remove('done');
       btn.setAttribute('aria-label', '설치 명령 복사');
     }, 1800);

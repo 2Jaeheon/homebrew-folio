@@ -4,12 +4,15 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
 /* RisingLetters: split text into letters that rise one by one */
 function splitLetters(el) {
+  // A <br> in the markup becomes a newline here and a <br> again between the letter spans.
+  el.querySelectorAll('br').forEach((br) => br.replaceWith('\n'));
   const text = el.textContent.trim();
-  el.setAttribute('aria-label', text);
+  el.setAttribute('aria-label', text.replace(/\s*\n\s*/g, ' '));
   el.textContent = '';
   let i = 0;
-  text.split(' ').forEach((word, wi) => {
-    if (wi) el.append(' ');
+  text.split(/( |\s*\n\s*)/).forEach((word) => {
+    if (word === ' ') { el.append(' '); return; }
+    if (!word.trim()) { el.append(document.createElement('br')); return; }
     const w = document.createElement('span');
     w.className = 'w';
     w.setAttribute('aria-hidden', 'true');

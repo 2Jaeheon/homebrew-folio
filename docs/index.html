@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Folio</title>
+<meta name="description" content="이력서와 포트폴리오를 내 Mac에 버전별로 보관하고, 공고마다 맞춘 사본을 따로 관리하는 macOS 앱.">
+<meta name="theme-color" content="#05070F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Folio">
+<meta property="og:description" content="이력서와 포트폴리오를 내 Mac에 버전별로 보관하고, 공고마다 맞춘 사본을 따로 관리하는 macOS 앱.">
+<meta property="og:image" content="assets/shots/real.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/app-demo.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="nav">
+  <a class="nav-brand" href="#top" aria-label="Folio 처음으로">
+    <img src="assets/favicon.svg" alt="" width="24" height="24"> Folio
+  </a>
+  <nav aria-label="페이지 안내">
+    <a href="#features">기능</a>
+    <a href="#mcp">AI 연결</a>
+    <a href="#install">설치</a>
+    <a href="https://github.com/MODUGGAGI/homebrew-folio">GitHub</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <h1 class="hero-title" data-rise data-rise-now>고칠 때마다, 버전으로 남깁니다</h1>
+    <p class="hero-sub">이력서와 포트폴리오를 내 Mac에 버전별로 보관하고, 공고마다 맞춘 사본을 따로 관리하는 앱.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://github.com/MODUGGAGI/homebrew-folio/releases/latest/download/Folio.zip">Folio 내려받기</a>
+      <div class="brew">
+        <code>brew install --cask moduggagi/folio/folio</code>
+        <button class="copy" type="button" data-copy="brew install --cask moduggagi/folio/folio" aria-label="설치 명령 복사"><span>복사</span></button>
+      </div>
+    </div>
+    <ul class="chips" aria-label="요구 사항">
+      <li>macOS 26 이상</li>
+      <li>Apple Silicon과 Intel 모두 지원</li>
+      <li>Apple 공증(Developer ID 서명) 완료</li>
+    </ul>
+  </div>
+
+  <figure class="hero-mark" aria-hidden="true">
+    <svg viewBox="0 0 1120 1024">
+      <defs>
+        <linearGradient id="face" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B0CBF6"/><stop offset="1" stop-color="#8EB1EE"/></linearGradient>
+        <path id="F" d="M200 370 C200 268 268 190 370 190 H818 Q848 190 843 220 L822 350 Q817 380 787 380 H410 Q380 380 380 410 V460 Q380 490 410 490 H675 Q705 490 700 520 L686 600 Q681 630 651 630 H410 Q380 630 380 660 V830 Q380 860 350 860 H230 Q200 860 200 830 Z"/>
+      </defs>
+      <!-- Same offsets as design/icon/folio-icon.svg: stack-3, stack-2, stack-1, face -->
+      <g class="layer" style="--i:0"><use href="#F" fill="#1E2A6E" transform="translate(48 38)"/><text x="930" y="262">v1</text></g>
+      <g class="layer" style="--i:1"><use href="#F" fill="#2A5FD0" transform="translate(8 4)"/><text x="930" y="226">v2</text></g>
+      <g class="layer" style="--i:2"><use href="#F" fill="#4C97F0" transform="translate(-32 -30)"/><text x="930" y="190">v3</text></g>
+      <g class="layer" style="--i:3"><use href="#F" fill="url(#face)" stroke="rgba(255,255,255,.55)" stroke-width="3" transform="translate(-72 -64)"/><text x="930" y="154">v4</text></g>
+    </svg>
+  </figure>
+</section>
+
+<section class="showcase" id="showcase" aria-labelledby="showcase-title">
+  <div class="showcase-sticky">
+    <h2 class="section-title" id="showcase-title" data-rise>한 번 쓴 이력서를, 공고마다 맞춰서</h2>
+    <div class="lens-tabs scene-tabs" role="tablist" aria-label="장면 고르기"><span class="lens" aria-hidden="true"></span></div>
+    <!-- The Folio window rebuilt in HTML (assets/js/app-demo.js); the captions below say what it shows. -->
+    <div class="app-frame" id="app-demo" aria-hidden="true"></div>
+    <p class="caption" aria-live="polite"></p>
+  </div>
+</section>
+
+<figure class="real-shot">
+  <img src="assets/shots/real.png" alt="실제 Folio 앱 화면. 사이드바, 버전 목록, 문서 미리보기." loading="lazy" onerror="this.closest('figure').hidden = true">
+  <figcaption>실제 앱 화면</figcaption>
+</figure>
+
+<section class="features" id="features" aria-labelledby="features-title">
+  <h2 class="section-title" id="features-title" data-rise>필요한 것만 있습니다</h2>
+  <ul class="grid">
+    <li class="card">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h11M5 12h11M5 16h7"/><path d="M8 4h11v15"/></svg>
+      <h3>버전과 메모</h3>
+      <p>문서를 고칠 때마다 v1, v2… 새 버전으로 쌓입니다. 버전마다 무엇을 바꿨는지 메모를 남길 수 있습니다.</p>
+    </li>
+    <li class="card">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
+      <h3>공고 저장</h3>
+      <p>공고 URL을 붙여 넣으면 본문 글, PDF 스냅샷, 사이트 아이콘을 저장합니다. 공고가 내려가도 남아 있습니다.</p>
+    </li>
+    <li class="card">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/><path d="M10 12h4"/></svg>
+      <h3>준비 중에서 제출 완료로</h3>
+      <p>공고마다 상태가 둘입니다. 제출 완료로 바꾸면 그 공고의 문서는 더 바뀌지 않게 잠깁니다.</p>
+    </li>
+    <li class="card">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="8" height="16" rx="2"/><rect x="13" y="4" width="8" height="16" rx="2"/><path d="M15 9h4M15 13h3M5 9h4"/></svg>
+      <h3>HTML 비교</h3>
+      <p>코드가 아니라 보이는 문서 위에 차이를 칠합니다. 더한 글은 초록, 지운 글은 빨간 취소선. 나란히 놓고 볼 수도 있습니다.</p>
+    </li>
+    <li class="card">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg>
+      <h3>A4 PDF로 저장</h3>
+      <p>HTML로 만든 이력서를 A4 쪽에 맞춰 PDF로 내보냅니다. 공고에서는 내보낸 PDF를 그 버전 옆에 같이 둡니다.</p>
+    </li>
+    <li class="card">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h6l2 2h10v10H3z"/><path d="M12 14h4"/></svg>
+      <h3>내 Mac 폴더에만</h3>
+      <p>계정도 동기화도 데이터베이스도 없습니다. 모든 것이 폴더 하나에 있어서 복사하면 백업입니다. 지운 항목은 30일 동안 휴지통에 남습니다.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="mcp" id="mcp" aria-labelledby="mcp-title">
+  <div class="mcp-copy">
+    <h2 class="section-title" id="mcp-title" data-rise>AI에게 맡겨도 내 문서는 그대로</h2>
+    <p class="lead">MCP는 Claude 같은 AI가 내 앱의 자료를 읽고 쓸 수 있게 이어 주는 약속된 연결 방식입니다. Folio 안에는 그 연결 담당 <code>folio-mcp</code>가 들어 있습니다.</p>
+    <dl class="rules">
+      <div><dt>읽을 수 있는 것</dt><dd>내 문서와 버전, 저장한 공고 본문</dd></div>
+      <div><dt>쓸 수 있는 것</dt><dd>준비 중인 공고 안에 맞춘 이력서의 새 버전</dd></div>
+      <div><dt>할 수 없는 것</dt><dd>기존 버전 고치기, 지우기, 제출하기. 이건 늘 내가 합니다</dd></div>
+    </dl>
+  </div>
+  <div class="chat" aria-label="Claude와 나눈 대화 예시">
+    <p class="bubble me"><span class="typed" data-text="네이버웹툰 공고에 맞춰 이력서 다듬어 줘"></span></p>
+    <ol class="tools">
+      <li>공고 본문 읽음 <code>folio_read_posting</code></li>
+      <li>PDF 이력서 v6 읽음 <code>folio_read_version</code></li>
+      <li>공고 안에 새 버전 저장 <code>folio_add_version</code></li>
+    </ol>
+    <p class="bubble ai">공고가 찾는 대규모 트래픽 서버 경험을 앞으로 올리고, 관련 적은 항목은 줄였어요. Folio에서 이전 버전과 비교해 보세요.</p>
+    <div class="result">
+      <img src="assets/favicon.svg" alt="" width="36" height="36">
+      <div>
+        <strong>공고용 이력서 v2 추가됨</strong>
+        <span>NAVER WEBTOON, 준비 중. 내 문서는 바뀌지 않았습니다.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="install" id="install" aria-labelledby="install-title">
+  <h2 class="section-title" id="install-title" data-rise>설치</h2>
+  <div class="lens-tabs install-tabs" role="tablist" aria-label="설치 방법">
+    <span class="lens" aria-hidden="true"></span>
+    <button type="button" role="tab" id="tab-brew" aria-controls="pane-brew" aria-selected="true">Homebrew</button>
+    <button type="button" role="tab" id="tab-zip" aria-controls="pane-zip" aria-selected="false" tabindex="-1">직접 내려받기</button>
+  </div>
+  <div class="pane" id="pane-brew" role="tabpanel" aria-labelledby="tab-brew">
+    <ol class="steps">
+      <li><h3>터미널 열기</h3><p>Spotlight(⌘ 스페이스)에서 "터미널"을 찾아 엽니다.</p></li>
+      <li><h3>명령 붙여 넣기</h3>
+        <div class="brew">
+          <code>brew install --cask moduggagi/folio/folio</code>
+          <button class="copy" type="button" data-copy="brew install --cask moduggagi/folio/folio" aria-label="설치 명령 복사"><span>복사</span></button>
+        </div>
+      </li>
+      <li><h3>Folio 열기</h3><p>응용 프로그램 폴더에서 Folio를 엽니다. 업데이트는 <code>brew upgrade --cask folio</code>.</p></li>
+    </ol>
+  </div>
+  <div class="pane" id="pane-zip" role="tabpanel" aria-labelledby="tab-zip" hidden>
+    <ol class="steps">
+      <li><h3>내려받기</h3><p><a class="btn btn-primary" href="https://github.com/MODUGGAGI/homebrew-folio/releases/latest/download/Folio.zip">Folio.zip 내려받기</a></p></li>
+      <li><h3>응용 프로그램으로 옮기기</h3><p>압축을 풀고 Folio.app을 응용 프로그램 폴더로 끌어다 놓습니다.</p></li>
+      <li><h3>Folio 열기</h3><p>Apple 공증을 마친 앱이라 바로 열 수 있습니다. 처음 열 때 묻는 창이 뜨면 열기를 누릅니다.</p></li>
+    </ol>
+  </div>
+  <p class="req">macOS 26 이상. Apple Silicon과 Intel 모두 지원.</p>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p><img src="assets/favicon.svg" alt="" width="20" height="20"> Folio는 내 Mac에서만 동작하는 이력서와 포트폴리오 보관함입니다.</p>
+  <a href="https://github.com/MODUGGAGI/homebrew-folio">GitHub에서 보기</a>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/app-demo.js"></script>
+</body>
+</html>

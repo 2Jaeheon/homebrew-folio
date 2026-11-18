@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>윤하람 포트폴리오</title>
+<style>
+:root{--ink:#111418;--sub:#5f6670;--line:#dfe6e1;--paper:#f6f8f7;--card:#fff;--accent:#00a85a;--accent-soft:#e2efe8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system, 'Apple SD Gothic Neo', Pretendard, sans-serif;color:var(--ink);background:var(--paper);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:860px;margin:0 auto;padding:56px 40px 72px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--sub)}
+.top b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--ink);color:var(--paper);font-size:14px;margin-right:10px;vertical-align:middle}
+.top a{color:var(--accent);text-decoration:none;font-weight:600}
+.hero{margin:56px 0 52px}
+.hero h1{font-size:50px;line-height:1.15;font-weight:800;letter-spacing:-.035em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{margin-top:18px;font-size:17px;color:var(--sub);max-width:560px}
+.stats{margin-top:26px;display:flex;gap:28px}
+.stats div{font-size:13px;color:var(--sub)}
+.stats strong{display:block;font-size:26px;color:var(--ink);letter-spacing:-.02em}
+.case{display:grid;grid-template-columns:1fr 210px;gap:36px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:40px 40px 40px 44px;margin-top:24px}
+.case.flip{grid-template-columns:210px 1fr}
+.case.flip .stage{order:-1}
+.no{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--accent)}
+.case h2{margin-top:8px;font-size:30px;font-weight:800;letter-spacing:-.025em}
+.case h2 span{font-size:15px;font-weight:500;color:var(--sub);margin-left:10px;letter-spacing:0}
+.case p{margin-top:12px;color:var(--sub)}
+.case p strong{color:var(--ink)}
+.chips{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.chips span b{font-size:15px;margin-right:4px}
+.stack{margin-top:14px;font-size:12.5px;color:var(--sub);letter-spacing:.02em}
+.stage{display:grid;place-items:center;height:330px;border-radius:22px;background:var(--bg,#e9efe9)}
+.phone{width:150px;height:300px;border-radius:32px;background:#111;padding:7px;box-shadow:0 18px 40px rgba(0,0,0,.18)}
+.screen{position:relative;height:100%;border-radius:26px;overflow:hidden;background:var(--sc,#fff);padding:30px 12px 12px}
+.screen::before{content:"";position:absolute;top:9px;left:50%;width:44px;height:12px;margin-left:-22px;border-radius:8px;background:#111}
+.bar{height:8px;border-radius:4px;background:var(--fg,#ccc);margin-bottom:8px}
+.blk{border-radius:12px;background:var(--fg2,#eee);margin-bottom:8px}
+.dots{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:6px 0 10px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--fg2,#eee)}
+.dots i.on{background:var(--fg,#ccc)}
+.row{display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.row i{flex:none;width:12px;height:12px;border-radius:4px;border:2px solid var(--fg,#ccc)}
+.row i.on{background:var(--fg,#ccc)}
+.row s{flex:1;height:7px;border-radius:4px;background:var(--fg2,#eee)}
+.ring{width:96px;height:96px;margin:10px auto 14px;border-radius:50%;background:conic-gradient(var(--fg) 0 72%,var(--fg2) 72% 100%);display:grid;place-items:center}
+.ring::after{content:"";width:72px;height:72px;border-radius:50%;background:var(--sc)}
+.foot{margin-top:56px;display:flex;justify-content:space-between;font-size:13px;color:var(--sub);border-top:1px solid var(--line);padding-top:18px}
+.foot a{color:var(--accent);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><span><b>윤</b>윤하람 · iOS 포트폴리오</span><a href="https://example.com">haram@example.com</a></div>
+
+<section class="hero">
+<h1>매일 여는 앱을<br>조용하게 만듭니다.</h1>
+<p>SwiftUI 4년 차. 화면 수보다 사용자가 앱을 여는 횟수에 관심이 많습니다. 아래는 직접 설계하고 출시한 두 가지 이야기입니다.</p>
+<div class="stats">
+<div><strong>4년</strong>iOS 개발</div>
+<div><strong>2개</strong>출시한 앱</div>
+</div>
+</section>
+
+<article class="case">
+<div>
+<div class="no">CASE 01</div>
+<h2>하루결 <span>포근랩 · 습관 기록</span></h2>
+<p>7년 된 UIKit 앱을 멈추지 않고 SwiftUI로 옮겼습니다. 화면 단위로 나눠 <strong>매 릴리스마다 몇 개씩</strong> 교체했고, 그 사이 시작 속도도 절반 이하로 줄였습니다.</p>
+<div class="chips">
+<span><b>0.9초</b>콜드 스타트</span>
+<span><b>38/42</b>SwiftUI 전환 화면</span>
+</div>
+<p class="stack">SwiftUI · Swift Concurrency · WidgetKit · ActivityKit</p>
+</div>
+<div class="stage" style="--bg:#eef4f0">
+<div class="phone"><div class="screen" style="--sc:#ffffff;--fg:#00dc64;--fg2:#eef4f0">
+<div class="bar" style="width:60%"></div>
+<div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i></div>
+<div class="row"><i class="on"></i><s></s></div>
+<div class="row"><i class="on"></i><s style="flex:.7"></s></div>
+<div class="row"><i></i><s style="flex:.85"></s></div>
+<div class="blk" style="height:64px;margin-top:10px"></div>
+</div></div>
+</div>
+</article>
+
+<article class="case flip">
+<div class="stage" style="--bg:#dde6ee">
+<div class="phone"><div class="screen" style="--sc:#1c2530;--fg:#8fc3e8;--fg2:#2c3a48">
+<div class="bar" style="width:40%;margin:4px auto 10px"></div>
+<div class="ring"></div>
+<div class="bar" style="width:70%;margin:0 auto 18px;background:#2c3a48"></div>
+<div class="blk" style="height:34px;border-radius:17px;background:#8fc3e8"></div>
+<div class="blk" style="height:34px;border-radius:17px"></div>
+</div></div>
+</div>
+<div>
+<div class="no">CASE 02</div>
+<h2>잔잔 <span>개인 앱 · 집중 타이머</span></h2>
+<p>도서관에서도 쓸 수 있게 소리 대신 <strong>진동 패턴</strong>으로 남은 시간을 알려 줍니다. Core Haptics로 패턴 여섯 가지를 직접 디자인했습니다.</p>
+<div class="chips">
+<span><b>1.2만</b>누적 다운로드</span>
+<span><b>4.8</b>App Store 평점</span>
+</div>
+<p class="stack">SwiftUI · Core Haptics · WidgetKit</p>
+</div>
+
+</article>
+
+<div class="foot"><span>윤하람 · 2026</span><a href="https://example.com">github.com/example</a></div>
+</main>
+</body>
+</html>

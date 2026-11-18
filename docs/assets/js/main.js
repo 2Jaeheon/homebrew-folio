@@ -136,3 +136,15 @@ if (reduceMotion.matches) {
   }, { threshold: 0.5 });
   chatObserver.observe(chat);
 }
+
+/* Lineage: draw the version tree once when it scrolls in; reduced motion shows the final state */
+const lineage = document.querySelector('.lineage');
+if (lineage && !reduceMotion.matches) {
+  lineage.classList.add('js');
+  const lineageObserver = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    lineageObserver.disconnect();
+    lineage.classList.add('in');
+  }, { threshold: 0.4 });
+  lineageObserver.observe(lineage);
+}

@@ -367,3 +367,34 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
   .lens-tabs, .scene-tabs { gap: 20px; }
   .lens-tabs button, .scene-tabs button { height: auto; line-height: 1.3; padding: 6px 0 14px; font-size: 16px; }
 }
+
+/* Lineage: one resume keeps versions, each posting branches its own copy. Drawn once on scroll (main.js adds .js, then .in). */
+.lineage { max-width: 1240px; margin: 0 auto; padding: clamp(80px, 12vh, 140px) var(--gutter) 0; text-align: center; }
+.lineage .section-title { margin: 0 0 14px; }
+.lineage-sub { max-width: 44em; margin: 0 auto 56px; color: rgba(235, 235, 245, .6); font-size: clamp(16px, 1.4vw, 19px); }
+.lineage svg { display: block; width: 100%; max-width: 920px; height: auto; margin: 0 auto; overflow: visible; }
+.lineage .lineage-tall { display: none; max-width: 340px; }
+/* Below 800px the wide tree would shrink its labels under 11px, so switch to the tall one. */
+@media (max-width: 800px) {
+  .lineage .lineage-wide { display: none; }
+  .lineage .lineage-tall { display: block; }
+}
+.lineage text { fill: rgba(235, 235, 245, .6); font-size: 15px; font-weight: 500; text-anchor: middle; }
+.lineage text.side, .lineage text.row, .lineage text.br, .lineage text.cap { text-anchor: start; }
+.lineage text.row { fill: #eef1f9; font-size: 17px; font-weight: 600; }
+.lineage text.br { fill: #eef1f9; font-size: 15px; font-weight: 600; }
+.lineage text.cap { font-size: 14px; fill: rgba(235, 235, 245, .45); }
+.lineage .ln { fill: none; stroke-width: 2.5; stroke-linecap: round; }
+.lineage .ln.main { stroke: #8EB1EE; }
+.lineage .ln.dg { stroke: #ff6f0f; }
+.lineage .ln.wt { stroke: #00dc64; }
+.lineage .nd.main circle { fill: #8EB1EE; }
+.lineage .nd.dg circle { fill: #ff6f0f; }
+.lineage .nd.wt circle { fill: #00dc64; }
+.lineage .nd { transform-box: fill-box; transform-origin: center; }
+.lineage.js .ln { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.lineage.js .nd { opacity: 0; transform: scale(.6); }
+.lineage.js .fd { opacity: 0; }
+.lineage.js.in .ln { stroke-dashoffset: 0; transition: stroke-dashoffset var(--t, .7s) cubic-bezier(.32, .72, 0, 1) var(--d, 0s); }
+.lineage.js.in .nd { opacity: 1; transform: none; transition: opacity .3s ease-out var(--d), transform .45s cubic-bezier(.34, 1.32, .64, 1) var(--d); }
+.lineage.js.in .fd { opacity: 1; transition: opacity .35s ease-out var(--d); }

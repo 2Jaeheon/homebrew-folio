@@ -22,8 +22,16 @@ const SHOWCASE = {
   key: 26,
   load: 1200,
   scenes: [
-    { tab: '내 문서', title: '내 문서와 버전', text: '계속 다듬는 이력서와 포트폴리오는 내 문서에 둡니다. 고칠 때마다 v1, v2… 버전과 메모가 쌓이고, 예전 버전도 그대로 열어 볼 수 있습니다.',
-      steps: [{ at: 'row:resume' }, { at: 'ver:resume:3' }, { at: 'ver:resume:2' }] },
+    { tab: '버전 관리', title: '고칠 때마다 버전으로', text: '이력서를 고칠 때마다 v1, v2… 새 버전과 메모가 쌓입니다. 예전 버전은 그대로 남고, 두 버전을 비교하면 더한 글은 초록, 지운 글은 빨간색으로 보입니다.',
+      steps: [
+        { at: 'row:resume' },
+        { at: 'ver:resume:3', hold: 600 },
+        { at: 'ver:resume:2', hold: 600 },
+        { at: 'ver:resume:1', hold: 700 },
+        { at: 'ver:resume:4', hold: 700 },
+        { at: 'tb:compare', hold: 2200 },
+        { at: 'tb:compare' },
+      ] },
     { tab: '공고 추가', title: '공고 추가', text: '공고 URL을 붙여 넣고 불러오면 본문과 아이콘을 저장합니다. 공고가 내려가도 저장한 내용은 남아 있습니다.',
       steps: [
         { at: 'sb:addApp', hold: 500 },
@@ -32,18 +40,15 @@ const SHOWCASE = {
         { at: 'sheet:add', hold: 1050 },
         { at: 'post:scroll:560', scroll: true, hold: 1300 },
       ] },
-    { tab: '맞춤 이력서', title: '공고마다 맞춤 이력서', text: '내 문서의 한 버전을 공고로 가져와 그 공고에 맞게 고칩니다. 당근용과 웹툰용이 따로 남고, 이전 버전과 비교하면 더한 글은 초록, 지운 글은 빨간색입니다.',
+    { tab: '공고별 이력서', title: '공고마다 따로 다듬는 이력서', text: '이력서 v4에서 시작해 공고마다 사본을 갈라 다듬습니다. 당근용과 네이버웹툰용이 각자의 버전으로 따로 쌓이고, 내 이력서는 그대로입니다.',
       steps: [
-        { at: 'row:daangn', hold: 1450 },
+        { at: 'row:daangn', hold: 1600 },
         { at: 'row:webtoon', hold: 550 },
-        { at: 'ver:tailored:2', hold: 950 },
-        { at: 'tb:compare', hold: 1750 },
+        { at: 'ver:tailored:2', hold: 900 },
+        { at: 'tb:compare', hold: 1800 },
         { at: 'tb:inline', hold: 1200 },
-        { at: 'tb:split', hold: 700 },
         { at: 'tb:compare' },
       ] },
-    { tab: '제출', title: '제출 완료', text: '냈으면 제출 완료로 표시합니다. 그 공고의 문서는 더 바뀌지 않게 잠깁니다.',
-      steps: [{ at: 'status:submit', hold: 1300 }] },
   ],
 };
 
@@ -81,7 +86,13 @@ const SHOWCASE = {
   const NEW_APP = 'webtoon';
   const PAGE = { title: `${APPINFO.webtoon.role} | NAVER WEBTOON`, chars: '4,812' };
   const SUBMITTED_ON = '11월 18일';
+  // What each comparable document compares: the previous version on the left, the marked-up diff on the right.
+  const COMPARE = {
+    resume: { doc: 'resume', from: 3, to: 4, old: 'resume/v3/index.html', diff: 'resume/diff-4.html', ins: 3, del: 1 },
+    webtoon: { doc: 'tailored', from: 1, to: 2, old: 'tailored/v1/index.html', diff: 'tailored/diff.html', ins: 5, del: 3 },
+  };
   const diffCount = { ins: 5, del: 3 };
+  const compareKey = (s) => (s.sel === 'resume' && s.ver.resume === 4 ? 'resume' : s.sel === 'webtoon' && s.item === 2 ? 'webtoon' : null);
 
   const day = ([m, d]) => `${m}월 ${d}일`;
   const stamp = (md) => `${day(md)} 오후 7:00`;
@@ -156,13 +167,13 @@ const SHOWCASE = {
       <div class="dview posting" data-at="post:scroll:560"><img src="assets/app/posting.png" alt="" width="838" height="2000" loading="lazy"></div>
       <div class="dview cmp">
         <div class="split">
-          <div class="cpane" style="left:0"><div class="phead">이전 버전 · v1 · ${day(DATES.tailored[0])}</div><div class="backdrop"></div><div class="paper"><iframe class="on" src="${DOCS}tailored/v1/index.html" loading="lazy" tabindex="-1" aria-hidden="true" title=""></iframe></div></div>
-          <div class="cpane"><div class="phead">선택한 버전 · v2 · ${day(DATES.tailored[1])}</div><div class="backdrop"></div><div class="paper"><iframe class="on" src="${DOCS}tailored/diff.html" loading="lazy" tabindex="-1" aria-hidden="true" title=""></iframe></div></div>
+          <div class="cpane" style="left:0"><div class="phead cmp-old-head"></div><div class="backdrop"></div><div class="paper"><iframe class="on cmp-old" src="${DOCS}tailored/v1/index.html" loading="lazy" tabindex="-1" aria-hidden="true" title=""></iframe></div></div>
+          <div class="cpane"><div class="phead cmp-new-head"></div><div class="backdrop"></div><div class="paper"><iframe class="on cmp-new" src="${DOCS}tailored/diff.html" loading="lazy" tabindex="-1" aria-hidden="true" title=""></iframe></div></div>
         </div>
         <div class="inline">
-          <div class="cpane"><div class="backdrop"></div><div class="paper"><iframe class="on" src="${DOCS}tailored/diff.html" loading="lazy" tabindex="-1" aria-hidden="true" title=""></iframe></div></div>
+          <div class="cpane"><div class="backdrop"></div><div class="paper"><iframe class="on cmp-new" src="${DOCS}tailored/diff.html" loading="lazy" tabindex="-1" aria-hidden="true" title=""></iframe></div></div>
         </div>
-        <div class="bbar"><span>v1 → v2</span><span class="counts"><span><b class="sw i">가</b><em data-count="ins"></em></span><span><b class="sw d">가</b><em data-count="del"></em></span></span></div>
+        <div class="bbar"><span class="cmp-range"></span><span class="counts"><span><b class="sw i">가</b><em data-count="ins"></em></span><span><b class="sw d">가</b><em data-count="del"></em></span></span></div>
       </div>
       <div class="prep"><span class="orb"></span>바뀐 곳을 찾는 중…</div>
     </section>
@@ -189,7 +200,7 @@ const SHOWCASE = {
     <header class="tb">
       <div class="tb-lead"><span class="tb-toggle">${ic('sidebar')}</span><div class="tb-title"><b></b><span></span></div></div>
       <div class="tb-trail">
-        <div class="cap base-cap" hidden><span class="btn-in base">기준: v1${ic('chevron')}</span></div>
+        <div class="cap base-cap" hidden><span class="btn-in base"><span class="cmp-base">기준: v1</span>${ic('chevron')}</span></div>
         <div class="cap cmp-cap" hidden>
           <div class="picker" hidden><span class="plens"></span><span class="btn-in" data-at="tb:split" data-mode="split">나란히</span><span class="btn-in" data-at="tb:inline" data-mode="inline">한 화면</span></div>
           <span class="btn-in toggle" data-at="tb:compare">${ic('split')}<span class="label"><span style="visibility:hidden">이전 버전과 비교</span></span></span>
@@ -243,7 +254,7 @@ const SHOWCASE = {
     }
     if (kind === 'post' && b) s.postY = +b;
     // Only the NAVER WEBTOON resume has an earlier version to compare with.
-    if (at === 'tb:compare' && s.sel === 'webtoon' && s.item === 2) s.comparing = !s.comparing;
+    if (at === 'tb:compare' && compareKey(s)) s.comparing = !s.comparing;
     if (at === 'tb:split' || at === 'tb:inline') s.mode = a;
     if (at === 'status:submit' && APPINFO[s.sel]) s.status[s.sel] = s.status[s.sel] === 'preparing' ? 'submitted' : 'preparing';
     return s;
@@ -295,7 +306,7 @@ const SHOWCASE = {
   }
 
   /* Render: apply `state` to the window. `instant` jumps without motion. */
-  let shown = { kind: null, doc: null, app: null, comparing: false, dw: null };
+  let shown = { kind: null, doc: null, app: null, comparing: false, dw: null, cmp: null };
   let timers = [];
   const later = (fn, ms) => timers.push(setTimeout(fn, ms));
 
@@ -377,6 +388,19 @@ const SHOWCASE = {
     const view = kind === 'none' ? 'empty' : docKey ? 'doc' : 'posting';
     ['empty', 'doc', 'posting'].forEach((v) => $('.dview.' + v).classList.toggle('on', v === view));
     $('.dview.cmp').classList.toggle('on', s.comparing);
+    const ck = compareKey(s);
+    if (ck && shown.cmp !== ck) {
+      const c = COMPARE[ck];
+      $('.cmp-old').src = DOCS + c.old;
+      $$('.cmp-new').forEach((f) => { f.src = DOCS + c.diff; });
+      $('.cmp-old-head').textContent = `이전 버전 · v${c.from} · ${day(DATES[c.doc][c.from - 1])}`;
+      $('.cmp-new-head').textContent = `선택한 버전 · v${c.to} · ${day(DATES[c.doc][c.to - 1])}`;
+      $('.cmp-range').textContent = `v${c.from} → v${c.to}`;
+      $('.cmp-base').textContent = `기준: v${c.from}`;
+      Object.assign(diffCount, { ins: c.ins, del: c.del });
+      counts();
+      shown.cmp = ck;
+    }
     app.style.setProperty('--py', s.postY);
     renderSheet();
     if (s.sheet?.phase === 'loading') later(() => { state = act(state, 'sheet:loaded'); render(); }, SHOWCASE.load);
@@ -388,7 +412,7 @@ const SHOWCASE = {
     $('.tb-title span').textContent = sub;
     $('.base-cap').hidden = !s.comparing;
     $('.picker').hidden = !s.comparing;
-    $('.cmp-cap').hidden = view !== 'doc' || (kind === 'app' && DATES[info.doc].length < 2);
+    $('.cmp-cap').hidden = view !== 'doc' || !ck;
     $('.pdf-cap').hidden = view !== 'doc';
     $('.web-cap').hidden = view !== 'posting';
     const toggle = $('.toggle');
@@ -572,9 +596,9 @@ const SHOWCASE = {
       render(true);
     })
     .catch(() => {});
-  fetch(`${DOCS}tailored/diff.html`).then((r) => (r.ok ? r.text() : Promise.reject())).then((html) => {
-    diffCount.ins = (html.match(/<ins\b/g) || []).length;
-    diffCount.del = (html.match(/<del\b/g) || []).length;
-    counts();
-  }).catch(() => {});
+  Object.values(COMPARE).forEach((c) => fetch(DOCS + c.diff).then((r) => (r.ok ? r.text() : Promise.reject())).then((html) => {
+    c.ins = (html.match(/<ins\b/g) || []).length;
+    c.del = (html.match(/<del\b/g) || []).length;
+    shown.cmp = null;
+  }).catch(() => {}));
 })();

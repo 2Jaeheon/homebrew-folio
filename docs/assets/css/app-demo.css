@@ -106,7 +106,7 @@
   animation: appCapIn var(--state) both;
 }
 @keyframes appCapIn { from { opacity: 0; } }
-.cap[hidden], .cap [hidden] { display: none; }
+.cap[hidden], .cap [hidden], .picker[hidden] { display: none; }
 .btn-in { position: relative; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 999px; white-space: nowrap; transition: color var(--hover); }
 .btn-in svg { width: 15px; height: 15px; }
 .app[data-live] .btn-in:hover, .btn-in.hov { color: var(--accent); }

@@ -469,3 +469,5 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
   color: #b0cbf6; background: rgba(47, 110, 224, .14); border: 1px solid rgba(76, 151, 240, .32); }
 .steps .btn-quiet:hover { background: rgba(47, 110, 224, .24); color: #fff; }
 .steps .btn-quiet svg { width: 14px; height: 14px; }
+/* The result card hugs the left like the reply it belongs to, so it never reads as the user's message. */
+.chat-claude .result { width: fit-content; max-width: calc(100% - 28px); align-self: flex-start; padding-right: 22px; }

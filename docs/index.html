@@ -260,8 +260,29 @@
 </main>
 
 <footer class="footer">
-  <p><img src="assets/icon.png" alt="" width="20" height="20"> Folio는 내 Mac 안에서만 동작하는 이력서, 포트폴리오 보관함이에요.</p>
-  <a href="https://github.com/MODUGGAGI/homebrew-folio">GitHub에서 보기</a>
+  <div class="foot-top">
+    <a class="foot-brand" href="#top"><img src="assets/icon.png" alt="" width="24" height="24"> Folio</a>
+    <nav class="foot-links" aria-label="바닥글">
+      <a class="mail" href="#contact" data-u="kiroro0814" data-d="naver.com">문의</a>
+      <a href="https://github.com/MODUGGAGI/homebrew-folio/releases">업데이트 내역</a>
+      <details class="oss">
+        <summary>오픈소스 고지</summary>
+        <ul>
+          <li>metal-fx, MIT, Jakub Antalik (Paper Shaders liquidMetal 셰이더 포함, Apache-2.0, Paper Design, Inc.)</li>
+          <li>React, ReactDOM, MIT, Meta Platforms, Inc.</li>
+          <li>Lucide 아이콘, ISC, Lucide Contributors</li>
+          <li>Pretendard 글꼴, SIL Open Font License 1.1, Kil Hyung-jin</li>
+          <li>화면 예시 속 회사 이름과 로고는 각 회사의 상표이며, 예시로만 쓰였어요.</li>
+        </ul>
+      </details>
+    </nav>
+  </div>
+  <p class="foot-privacy">Folio는 어떤 정보도 수집하지 않아요. 모든 데이터는 내 Mac에만 있어요.</p>
+  <div class="foot-bottom">
+    <span>© 2026 Folio</span>
+    <!-- The address is put together in main.js so it is not sitting in the HTML for scrapers. -->
+    <a class="mail" id="contact" href="#contact" data-u="kiroro0814" data-d="naver.com">kiroro0814 [at] naver.com</a>
+  </div>
 </footer>
 
 <script src="assets/js/main.js"></script>

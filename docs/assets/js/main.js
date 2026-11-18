@@ -195,3 +195,10 @@ if (heroCta && navCta) {
     navCta.setAttribute('aria-hidden', String(!on));
   }).observe(heroCta);
 }
+
+/* Contact address: assembled here so it is not plain text in the HTML */
+document.querySelectorAll('.mail').forEach((a) => {
+  const addr = `${a.dataset.u}@${a.dataset.d}`;
+  a.href = `mailto:${addr}`;
+  if (a.id === 'contact') a.textContent = addr;
+});

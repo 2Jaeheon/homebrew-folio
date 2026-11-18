@@ -251,10 +251,18 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 
 .footer {
   max-width: 1240px; margin: clamp(80px, 12vh, 140px) auto 0; padding: 32px var(--gutter) 48px;
-  border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;
-  color: var(--muted); font-size: 15px;
+  border-top: 1px solid var(--line); color: var(--muted); font-size: 14px;
 }
-.footer p { margin: 0; display: flex; gap: 10px; align-items: center; }
+.foot-top, .foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+.foot-brand { display: flex; align-items: center; gap: 10px; color: var(--pale); font-weight: 700; font-size: 16px; text-decoration: none; }
+.foot-links { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 24px; }
+.footer a { color: var(--muted); text-decoration: none; transition: color var(--feedback); }
+.footer a:hover, .oss summary:hover { color: var(--pale); }
+.oss summary { cursor: pointer; list-style: none; transition: color var(--feedback); }
+.oss summary::-webkit-details-marker { display: none; }
+.oss ul { margin: 10px 0 0; padding: 0; list-style: none; max-width: 30em; font-size: 12.5px; line-height: 1.7; color: rgba(235, 235, 245, .45); }
+.foot-privacy { margin: 24px 0 16px; }
+.foot-bottom { font-size: 13px; color: rgba(235, 235, 245, .45); }
 
 /* Narrow screens and reduced motion */
 @media (max-width: 820px) {
@@ -474,3 +482,4 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
   opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity var(--state), transform var(--state); }
 .nav-cta svg { width: 14px; height: 14px; }
 .nav.cta-on .nav-cta { opacity: 1; transform: none; pointer-events: auto; }
+.foot-top { align-items: flex-start; }

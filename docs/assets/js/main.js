@@ -112,29 +112,57 @@ installButtons.forEach((b, i) => {
   });
 });
 
-/* MCP chat: type the request, then reveal tool calls and the result card */
-const chat = document.querySelector('.chat');
-const typed = chat.querySelector('.typed');
-const steps = [...chat.querySelectorAll('.tools li'), chat.querySelector('.ai'), chat.querySelector('.result')];
+/* MCP chat: two looks (Claude, Codex) behind underline tabs. Each plays once in view: type the request, then reveal the steps. */
+const chatTabs = document.querySelector('.chat-tabs');
+const chatButtons = [...chatTabs.querySelectorAll('[role="tab"]')];
+const chats = chatButtons.map((b) => document.getElementById(b.getAttribute('aria-controls')));
+let chatTimers = [];
+let chatSeen = false;
+function playChat(chat) {
+  chatTimers.forEach(clearTimeout);
+  chatTimers = [];
+  const typed = chat.querySelector('.typed');
+  const steps = [...chat.querySelectorAll('.step')];
+  if (reduceMotion.matches) {
+    typed.textContent = typed.dataset.text;
+    steps.forEach((el) => el.classList.add('shown'));
+    return;
+  }
+  chat.classList.add('js', 'typing');
+  steps.forEach((el) => el.classList.remove('shown'));
+  typed.textContent = '';
+  const text = typed.dataset.text;
+  for (let n = 1; n <= text.length; n++) chatTimers.push(setTimeout(() => { typed.textContent = text.slice(0, n); }, n * 55));
+  const done = text.length * 55;
+  chatTimers.push(setTimeout(() => chat.classList.remove('typing'), done));
+  steps.forEach((el, k) => chatTimers.push(setTimeout(() => el.classList.add('shown'), done + 500 + k * 550)));
+}
+function showChat(i, focus) {
+  selectTab(chatTabs, i);
+  chats.forEach((c, j) => { c.hidden = i !== j; });
+  if (chatSeen) playChat(chats[i]);
+  if (focus) chatButtons[i].focus();
+}
+chatButtons.forEach((b, i) => {
+  b.addEventListener('click', () => showChat(i));
+  b.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      showChat((i + (e.key === 'ArrowRight' ? 1 : -1) + chatButtons.length) % chatButtons.length, true);
+    }
+  });
+});
 if (reduceMotion.matches) {
-  typed.textContent = typed.dataset.text;
+  chatSeen = true;
+  chats.forEach(playChat);
 } else {
-  chat.classList.add('js');
+  chats.forEach((c) => c.classList.add('js'));
   const chatObserver = new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return;
     chatObserver.disconnect();
-    const text = typed.dataset.text;
-    let n = 0;
-    chat.classList.add('typing');
-    const typer = setInterval(() => {
-      typed.textContent = text.slice(0, ++n);
-      if (n < text.length) return;
-      clearInterval(typer);
-      chat.classList.remove('typing');
-      steps.forEach((el, k) => setTimeout(() => el.classList.add('shown'), 500 + k * 550));
-    }, 55);
+    chatSeen = true;
+    playChat(chats.find((c) => !c.hidden));
   }, { threshold: 0.5 });
-  chatObserver.observe(chat);
+  chatObserver.observe(document.querySelector('.chats'));
 }
 
 /* Lineage: draw the version tree once when it scrolls in; reduced motion shows the final state */

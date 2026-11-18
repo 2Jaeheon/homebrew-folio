@@ -284,3 +284,14 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
 .steps .term { width: 100%; margin-top: 12px; }
 .steps .term-title { display: none; }
+
+/* Centered hero: the stacked F on top, then the headline, one line of copy, the command and the button. */
+.hero { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 8px; min-height: 0; padding-top: clamp(32px, 6vh, 72px); }
+.hero-mark { order: -1; width: min(260px, 60vw); }
+.hero-copy { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.hero-sub { margin-inline: auto; }
+.hero-actions { width: min(100%, 800px); }
+.hero-sub { max-width: 40em; }
+.chips { justify-content: center; flex-wrap: nowrap; }
+.chips li { white-space: nowrap; }
+@media (max-width: 760px) { .chips { flex-wrap: wrap; } }

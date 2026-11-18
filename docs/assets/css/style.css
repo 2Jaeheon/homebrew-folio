@@ -55,9 +55,15 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   height: 64px; padding: 0 var(--gutter);
-  background: rgba(5, 7, 15, .6);
+}
+/* Tint and blur sit on a layer that runs past the header and fades out, so there is no hard bottom edge. */
+.nav::before {
+  content: ""; position: absolute; inset: 0 0 -28px; z-index: -1; pointer-events: none;
+  background: linear-gradient(rgba(5, 7, 15, .72), rgba(5, 7, 15, .45) 60%, rgba(5, 7, 15, 0));
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-mask-image: linear-gradient(#000 55%, transparent);
+  mask-image: linear-gradient(#000 55%, transparent);
 }
 .nav-brand { display: flex; align-items: center; gap: 10px; color: var(--pale); text-decoration: none; font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
 .nav-brand img { width: 32px; height: 32px; }

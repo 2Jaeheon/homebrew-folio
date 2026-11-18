@@ -145,6 +145,11 @@ if (lineage && !reduceMotion.matches) {
     if (!e.isIntersecting) return;
     lineageObserver.disconnect();
     lineage.classList.add('in');
+    // Once the tree is drawn, light keeps flowing along the lines and the newest version breathes.
+    setTimeout(() => {
+      lineage.classList.add('flowing');
+      lineage.querySelectorAll('.flow animate, .flow animateMotion').forEach((anim) => anim.beginElement());
+    }, 2300);
   }, { threshold: 0.4 });
   lineageObserver.observe(lineage);
 }

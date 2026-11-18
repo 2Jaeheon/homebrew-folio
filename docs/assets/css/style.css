@@ -372,7 +372,7 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .lineage { max-width: 1240px; margin: 0 auto; padding: clamp(80px, 12vh, 140px) var(--gutter) 0; text-align: center; }
 .lineage .section-title { margin: 0 0 14px; }
 .lineage-sub { max-width: 44em; margin: 0 auto 56px; color: rgba(235, 235, 245, .6); font-size: clamp(16px, 1.4vw, 19px); }
-.lineage svg { display: block; width: 100%; max-width: 920px; height: auto; margin: 0 auto; overflow: visible; }
+.lineage svg { display: block; width: 100%; max-width: 980px; height: auto; margin: 0 auto; overflow: visible; }
 .lineage .lineage-tall { display: none; max-width: 340px; }
 /* Below 800px the wide tree would shrink its labels under 11px, so switch to the tall one. */
 @media (max-width: 800px) {
@@ -399,3 +399,20 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .lineage.js.in .nd { opacity: 1; transform: none; transition: opacity .3s ease-out var(--d), transform .45s cubic-bezier(.34, 1.32, .64, 1) var(--d); }
 .lineage.js.in .fd { opacity: 1; transition: opacity .35s ease-out var(--d); }
 .lineage text.side-l { text-anchor: end; }
+
+/* Lineage: "제출 완료" badges at the branch ends, light flowing along the lines, a breathing newest version */
+.lineage .badge rect { stroke-width: 1.2; }
+.lineage .badge text { font-size: 13px; font-weight: 700; }
+.lineage .badge.dg rect { fill: rgba(255, 111, 15, .14); stroke: rgba(255, 138, 61, .7); }
+.lineage .badge.dg text, .lineage .badge.dg path { fill: #ff8a3d; stroke: #ff8a3d; }
+.lineage .badge.wt rect { fill: rgba(0, 220, 100, .12); stroke: rgba(34, 224, 122, .65); }
+.lineage .badge.wt text, .lineage .badge.wt path { fill: #22e07a; stroke: #22e07a; }
+.lineage .badge text { stroke: none; }
+.lineage .badge path { fill: none; }
+.lineage .flow.main { fill: #dbe7ff; }
+.lineage .flow.dg { fill: #ffb27a; }
+.lineage .flow.wt { fill: #7dffb4; }
+.lineage .ping { fill: none; stroke: #8EB1EE; stroke-width: 2; transform-box: fill-box; transform-origin: center; opacity: 0; }
+.lineage.flowing .ping { animation: ping 2.4s cubic-bezier(.32, .72, 0, 1) infinite; }
+@keyframes ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(3.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .lineage .flow { display: none; } .lineage .ping { animation: none; } }

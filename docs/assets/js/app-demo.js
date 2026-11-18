@@ -88,6 +88,8 @@ const SHOWCASE = {
     webtoon: { doc: 'tailored', from: 1, to: 2, old: 'tailored/v1/index.html', diff: 'tailored/diff.html', ins: 4, del: 1 },
   };
   const diffCount = { ins: 5, del: 3 };
+  // Like AppModel.canCompare: a previous version, or for an application's resume the 내 문서 version it started from.
+  const canCompare = (s) => (MASTERS[s.sel] ? s.ver[s.sel] > 1 : !!APPINFO[s.sel]);
   const compareKey = (s) => (s.sel === 'resume' && s.ver.resume === 4 ? 'resume' : s.sel === 'webtoon' && s.item === 2 ? 'webtoon' : null);
 
   const day = ([m, d]) => `${m}월 ${d}일`;
@@ -197,8 +199,8 @@ const SHOWCASE = {
       <div class="tb-lead"><span class="tb-toggle">${ic('sidebar')}</span><div class="tb-title"><b></b><span></span></div></div>
       <div class="tb-trail">
         <div class="cap base-cap" hidden><span class="btn-in base"><span class="cmp-base">기준: v1</span>${ic('chevron')}</span></div>
+        <div class="picker" hidden><span class="plens"></span><span class="btn-in" data-at="tb:split" data-mode="split">나란히</span><span class="btn-in" data-at="tb:inline" data-mode="inline">한 화면</span></div>
         <div class="cap cmp-cap" hidden>
-          <div class="picker" hidden><span class="plens"></span><span class="btn-in" data-at="tb:split" data-mode="split">나란히</span><span class="btn-in" data-at="tb:inline" data-mode="inline">한 화면</span></div>
           <span class="btn-in toggle" data-at="tb:compare">${ic('split')}<span class="label"><span style="visibility:hidden">이전 버전과 비교</span></span></span>
         </div>
         <div class="cap pdf-cap" hidden><span class="btn-in">${ic('pdf')}PDF로 저장</span></div>
@@ -408,11 +410,12 @@ const SHOWCASE = {
     $('.tb-title span').textContent = sub;
     $('.base-cap').hidden = !s.comparing;
     $('.picker').hidden = !s.comparing;
-    $('.cmp-cap').hidden = view !== 'doc' || !ck;
+    $('.cmp-cap').hidden = view !== 'doc';
     $('.pdf-cap').hidden = view !== 'doc';
     $('.web-cap').hidden = view !== 'posting';
     const toggle = $('.toggle');
     toggle.classList.toggle('on', s.comparing);
+    toggle.classList.toggle('off', view === 'doc' && !canCompare(s));
     rise($('.label', toggle), s.comparing ? '비교 끄기' : '이전 버전과 비교');
     if (s.comparing) {
       const on = $(`.picker [data-mode="${s.mode}"]`);
@@ -491,8 +494,10 @@ const SHOWCASE = {
     pointer.style.setProperty('--mx', p.x + 'px');
     pointer.style.setProperty('--my', p.y + 'px');
     pointer.classList.add('on');
+    $$('.btn-in.hov').forEach((b) => b.classList.remove('hov'));
     await wait(SHOWCASE.move);
     if (token !== playing) return;
+    if (el.matches('.btn-in')) el.classList.add('hov');
     if (press) {
       pointer.classList.add('down');
       await wait(SHOWCASE.press);

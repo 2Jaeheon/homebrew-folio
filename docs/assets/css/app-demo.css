@@ -109,25 +109,24 @@
 .cap[hidden], .cap [hidden] { display: none; }
 .btn-in { position: relative; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 999px; white-space: nowrap; transition: color var(--hover); }
 .btn-in svg { width: 15px; height: 15px; }
-.app[data-live] .btn-in:hover { color: var(--accent); }
+.app[data-live] .btn-in:hover, .btn-in.hov { color: var(--accent); }
 .base { gap: 3px; }
 .base svg { width: 10px; height: 10px; stroke-width: 2; }
-/* CompareToggleLabel: the fill only fades; on takes `state`, off takes `content` */
-.toggle::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--accent); opacity: 0; transition: opacity var(--content); }
-.toggle > * { position: relative; }
-.toggle.on { color: #fff !important; transition: color var(--state); }
-.toggle.on::before { opacity: 1; transition: opacity var(--state); }
+/* ToolbarCapsuleLabel: no fill of its own. Switched on (비교 끄기) it turns red; with nothing to compare it is greyed out. */
+.toggle { transition: color var(--content); }
+.toggle.on, .toggle.on.hov, .app[data-live] .toggle.on:hover { color: #ff3b30; }
+.toggle.off, .toggle.off.hov, .app[data-live] .toggle.off:hover { color: var(--ink3); }
 .toggle .label { display: inline-grid; }
 .toggle .label > * { grid-area: 1 / 1; text-align: center; }
 /* SlidingPicker */
-.picker { position: relative; display: flex; gap: 2px; }
+/* CompareModePicker: its own grey track and a solid accent lens, no glass behind it */
+.picker { position: relative; display: flex; align-self: center; padding: 2px; border-radius: 999px; background: rgba(0, 0, 0, .09); font-weight: 500; }
 .picker .plens {
-  position: absolute; top: 0; left: 0; height: 28px; border-radius: 999px; background: rgba(0, 136, 255, .78);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .45), 0 1px 4px rgba(0, 136, 255, .35);
+  position: absolute; top: 2px; left: 0; height: 28px; border-radius: 999px; background: var(--accent);
   transform: translateX(var(--px, 0)); width: var(--pw, 0);
   transition: transform var(--selection), width var(--selection);
 }
-.picker .btn-in { padding: 0 10px; }
+.picker .btn-in { padding: 0 12px; }
 .picker .btn-in.on { color: #fff; }
 
 /* RisingLetters */

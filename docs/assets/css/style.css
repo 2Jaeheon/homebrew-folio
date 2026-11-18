@@ -422,3 +422,4 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 /* the pile of "final" files the lineage section starts from */
 .lineage-sub .fname { display: inline-block; margin: 2px 2px; padding: 1px 8px; border-radius: 6px; font: 14px/1.6 ui-monospace, "SF Mono", Menlo, monospace; color: rgba(235, 235, 245, .7); background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .08); text-decoration: line-through; text-decoration-color: rgba(255, 120, 120, .6); }
 @media (max-width: 760px) { .lineage-sub br { display: none; } }
+.features .section-title { font-size: clamp(26px, 3.4vw, 44px); }

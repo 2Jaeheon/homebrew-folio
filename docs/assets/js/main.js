@@ -149,7 +149,7 @@ if (lineage && !reduceMotion.matches) {
     setTimeout(() => {
       lineage.classList.add('flowing');
       lineage.querySelectorAll('.flow animate, .flow animateMotion').forEach((anim) => anim.beginElement());
-    }, 2300);
+    }, 3500);
   }, { threshold: 0.4 });
   lineageObserver.observe(lineage);
 }

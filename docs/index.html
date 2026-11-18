@@ -82,13 +82,15 @@
       <filter id="glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     </defs>
     <text class="row" x="0" y="96">내 이력서</text>
-    <path class="ln main" pathLength="1" d="M200 90 H970" style="--t:1s;stroke:url(#trunk)"/>
+    <path class="ln main" pathLength="1" d="M200 90 H560" style="--t:.8s"/>
+    <!-- after both branches are submitted, the trunk grows on: v4 to v5 and beyond -->
+    <path class="ln main" pathLength="1" d="M560 90 H970" style="--d:2.3s;--t:1.1s;stroke:url(#trunk)"/>
     <g class="nd main" style="--d:0s"><circle cx="200" cy="90" r="6"/><text x="200" y="68">v1</text></g>
     <g class="nd main" style="--d:.12s"><circle cx="320" cy="90" r="6"/><text x="320" y="68">v2</text></g>
     <g class="nd main" style="--d:.24s"><circle cx="440" cy="90" r="6"/><text x="440" y="68">v3</text></g>
     <g class="nd main" style="--d:.36s"><circle cx="560" cy="90" r="7"/><text x="560" y="68">v4</text></g>
-    <g class="nd main" style="--d:.48s"><circle class="ping" cx="680" cy="90" r="6"/><circle cx="680" cy="90" r="6"/><text x="680" y="68">v5</text></g>
-    <text class="cap cap-l fd" x="544" y="128" style="--d:.8s">이력서 v4에서 시작</text>
+    <g class="nd main" style="--d:2.55s"><circle class="ping" cx="680" cy="90" r="6"/><circle cx="680" cy="90" r="6"/><text x="680" y="68">v5</text></g>
+    <text class="cap cap-l fd" x="544" y="128" style="--d:1s">이력서 v4에서 시작</text>
     <path class="ln dg" pathLength="1" d="M560 90 C560 150 580 180 640 180 H740" style="--d:.85s"/>
     <path class="ln wt" pathLength="1" d="M560 90 C560 210 580 250 640 250 H830" style="--d:.95s"/>
     <text class="br fd" x="640" y="168" style="--d:1.05s">A 회사</text>
@@ -112,13 +114,14 @@
       <filter id="glow-tall" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     </defs>
     <text class="row" x="20" y="24">내 이력서</text>
-    <path class="ln main" pathLength="1" d="M60 50 V400" style="--t:1s;stroke:url(#trunk-tall)"/>
+    <path class="ln main" pathLength="1" d="M60 50 V230" style="--t:.8s"/>
+    <path class="ln main" pathLength="1" d="M60 230 V400" style="--d:2.3s;--t:1.1s;stroke:url(#trunk-tall)"/>
     <g class="nd main" style="--d:0s"><circle cx="60" cy="50" r="6"/><text class="side-l" x="44" y="55">v1</text></g>
     <g class="nd main" style="--d:.12s"><circle cx="60" cy="110" r="6"/><text class="side-l" x="44" y="115">v2</text></g>
     <g class="nd main" style="--d:.24s"><circle cx="60" cy="170" r="6"/><text class="side-l" x="44" y="175">v3</text></g>
     <g class="nd main" style="--d:.36s"><circle cx="60" cy="230" r="7"/><text class="side-l" x="44" y="235">v4</text></g>
-    <g class="nd main" style="--d:.48s"><circle class="ping" cx="60" cy="290" r="6"/><circle cx="60" cy="290" r="6"/><text class="side-l" x="44" y="295">v5</text></g>
-    <text class="cap fd" x="84" y="222" style="--d:.8s">이력서 v4에서 시작</text>
+    <g class="nd main" style="--d:2.55s"><circle class="ping" cx="60" cy="290" r="6"/><circle cx="60" cy="290" r="6"/><text class="side-l" x="44" y="295">v5</text></g>
+    <text class="cap fd" x="84" y="222" style="--d:1s">이력서 v4에서 시작</text>
     <path class="ln dg" pathLength="1" d="M60 230 C60 270 150 260 150 300 V350" style="--d:.85s;--t:.5s"/>
     <path class="ln wt" pathLength="1" d="M60 230 C60 280 270 260 270 300 V430" style="--d:.95s;--t:.6s"/>
     <text class="br fd" x="162" y="322" style="--d:1.05s">A 회사</text>

@@ -29,6 +29,9 @@ if [[ -z "$identity" ]]; then
     printf '%s' "$DEVELOPER_ID_P12" | base64 --decode > "$tmp/cert.p12"
     security import "$tmp/cert.p12" -k "$kc" -P "$DEVELOPER_ID_P12_PASSWORD" -T /usr/bin/codesign >/dev/null
     rm -f "$tmp/cert.p12"
+    # codesign needs the intermediate CA to build the chain; a fresh keychain lacks it.
+    curl -fsSL https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer -o "$tmp/DeveloperIDG2CA.cer"
+    security import "$tmp/DeveloperIDG2CA.cer" -k "$kc" >/dev/null
     security set-key-partition-list -S apple-tool:,apple: -s -k "$kc_pw" "$kc" >/dev/null
     # codesign looks up identities through the search list, so add ours in front.
     security list-keychains -d user -s "$kc" $(security list-keychains -d user | tr -d '"')

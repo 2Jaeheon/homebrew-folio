@@ -71,8 +71,8 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
   transition: transform var(--feedback), background var(--feedback);
 }
 .btn:active { transform: scale(.97); }
-/* Like macOS app sites (Raycast, Claude): a squared-off button with a 1px top highlight and a hairline edge, no glow. */
-.btn-primary { background: #2f6ee0; color: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .22), inset 0 -1px 0 rgba(0, 0, 0, .15); }
+/* Like macOS app sites (Raycast, Claude): a squared-off button. Flat: no highlight, edge or glow. */
+.btn-primary { background: #2f6ee0; color: #fff; box-shadow: none; }
 .btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .btn-primary:hover { background: #3a78e8; }
 

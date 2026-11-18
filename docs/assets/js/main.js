@@ -202,3 +202,27 @@ document.querySelectorAll('.mail').forEach((a) => {
   a.href = `mailto:${addr}`;
   if (a.id === 'contact') a.textContent = addr;
 });
+
+/* Footer: only one popover open at a time; the releases list comes from GitHub (fallback stays on failure) */
+const pops = [...document.querySelectorAll('.pop')];
+pops.forEach((d) => d.addEventListener('toggle', () => { if (d.open) pops.forEach((o) => { if (o !== d) o.open = false; }); }));
+document.addEventListener('click', (e) => { if (!e.target.closest('.pop')) pops.forEach((d) => { d.open = false; }); });
+const relList = document.querySelector('.rel-list');
+if (relList) {
+  fetch('https://api.github.com/repos/MODUGGAGI/homebrew-folio/releases?per_page=5')
+    .then((r) => (r.ok ? r.json() : Promise.reject()))
+    .then((list) => {
+      const items = list.filter((x) => !x.draft && !x.prerelease);
+      if (!items.length) return;
+      relList.replaceChildren(...items.map((x) => {
+        const li = document.createElement('li');
+        const b = document.createElement('b');
+        b.textContent = x.name || x.tag_name;
+        const span = document.createElement('span');
+        span.textContent = new Date(x.published_at).toLocaleDateString('ko-KR');
+        li.append(b, span);
+        return li;
+      }));
+    })
+    .catch(() => {});
+}

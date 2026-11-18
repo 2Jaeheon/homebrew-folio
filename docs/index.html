@@ -263,11 +263,17 @@
   <div class="foot-top">
     <a class="foot-brand" href="#top"><img src="assets/icon.png" alt="" width="24" height="24"> Folio</a>
     <nav class="foot-links" aria-label="바닥글">
-      <a class="mail" href="#contact" data-u="kiroro0814" data-d="naver.com">문의</a>
-      <a href="https://github.com/MODUGGAGI/homebrew-folio/releases">업데이트 내역</a>
-      <details class="oss">
+      <details class="pop releases">
+        <summary>업데이트 내역</summary>
+        <div class="pop-card">
+          <!-- Filled from the GitHub releases API in main.js; this is the fallback. -->
+          <ol class="rel-list"><li><b>Folio 0.9.0</b><span>2026. 11. 18.</span></li></ol>
+          <a href="https://github.com/MODUGGAGI/homebrew-folio/releases" target="_blank" rel="noopener">GitHub에서 전체 보기 ↗</a>
+        </div>
+      </details>
+      <details class="pop oss">
         <summary>오픈소스 고지</summary>
-        <ul>
+        <ul class="pop-card">
           <li>metal-fx, MIT, Jakub Antalik (Paper Shaders liquidMetal 셰이더 포함, Apache-2.0, Paper Design, Inc.)</li>
           <li>React, ReactDOM, MIT, Meta Platforms, Inc.</li>
           <li>Lucide 아이콘, ISC, Lucide Contributors</li>
@@ -278,11 +284,9 @@
     </nav>
   </div>
   <p class="foot-privacy">Folio는 어떤 정보도 수집하지 않아요.<br>모든 데이터는 내 Mac에만 있어요.</p>
-  <div class="foot-bottom">
-    <span>© 2026 Folio</span>
-    <!-- The address is put together in main.js so it is not sitting in the HTML for scrapers. -->
-    <a class="mail" id="contact" href="#contact" data-u="kiroro0814" data-d="naver.com">kiroro0814 [at] naver.com</a>
-  </div>
+  <!-- The address is put together in main.js so it is not sitting in the HTML for scrapers. -->
+  <p class="foot-contact">문의 <a class="mail" id="contact" href="#contact" data-u="kiroro0814" data-d="naver.com">kiroro0814 [at] naver.com</a></p>
+  <p class="foot-copy">© 2026 Folio</p>
 </footer>
 
 <script src="assets/js/main.js"></script>

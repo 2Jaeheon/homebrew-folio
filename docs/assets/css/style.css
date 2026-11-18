@@ -156,9 +156,6 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .caption strong { color: var(--pale); font-weight: 600; }
 .caption.swap { opacity: 0; }
 
-.real-shot { max-width: 1100px; margin: 0 auto; padding: 48px var(--gutter) 0; }
-.real-shot img { border-radius: 14px; border: 1px solid var(--line); }
-.real-shot figcaption { margin-top: 12px; text-align: center; color: var(--muted); font-size: 15px; }
 
 /* Features */
 .features, .mcp, .install { max-width: 1240px; margin: 0 auto; padding: clamp(80px, 12vh, 140px) var(--gutter) 0; }
@@ -402,11 +399,13 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 
 /* Lineage: "제출 완료" badges at the branch ends, light flowing along the lines, a breathing newest version */
 .lineage .badge rect { stroke-width: 1.2; }
-.lineage .badge text { font-size: 13px; font-weight: 700; }
+.lineage .badge text { font-size: 12.5px; font-weight: 600; letter-spacing: .01em; }
 .lineage .badge.dg rect { fill: rgba(255, 111, 15, .14); stroke: rgba(255, 138, 61, .7); }
-.lineage .badge.dg text, .lineage .badge.dg path { fill: #ff8a3d; stroke: #ff8a3d; }
+.lineage .badge.dg text { fill: #ffa060; stroke: none; }
+.lineage .badge.dg path { stroke: #ff8a3d; }
 .lineage .badge.wt rect { fill: rgba(0, 220, 100, .12); stroke: rgba(34, 224, 122, .65); }
-.lineage .badge.wt text, .lineage .badge.wt path { fill: #22e07a; stroke: #22e07a; }
+.lineage .badge.wt text { fill: #4fe896; stroke: none; }
+.lineage .badge.wt path { stroke: #22e07a; }
 .lineage .badge text { stroke: none; }
 .lineage .badge path { fill: none; }
 .lineage .flow.main { fill: #dbe7ff; }

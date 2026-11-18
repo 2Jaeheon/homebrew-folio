@@ -415,3 +415,4 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .lineage.flowing .ping { animation: ping 2.4s cubic-bezier(.32, .72, 0, 1) infinite; }
 @keyframes ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(3.2); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .lineage .flow { display: none; } .lineage .ping { animation: none; } }
+.lineage text.cap-l { text-anchor: end; }

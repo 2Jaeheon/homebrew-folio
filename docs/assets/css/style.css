@@ -464,3 +464,8 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .card-ic { display: block; margin-bottom: 18px; }
 .card-ic svg { width: 30px; height: 30px; margin: 0; stroke: #b0cbf6; stroke-width: 1.6; }
 .mcp-note { margin: -12px 0 20px; font-size: 14px; color: rgba(235, 235, 245, .45); }
+/* A small, quiet download button that sits in a step card like the other cards' text, not a hero CTA. */
+.steps .btn-quiet { min-height: 36px; padding: 0 14px; margin-top: 14px; font-size: 14px; border-radius: 9px; gap: 6px;
+  color: #b0cbf6; background: rgba(47, 110, 224, .14); border: 1px solid rgba(76, 151, 240, .32); }
+.steps .btn-quiet:hover { background: rgba(47, 110, 224, .24); color: #fff; }
+.steps .btn-quiet svg { width: 14px; height: 14px; }

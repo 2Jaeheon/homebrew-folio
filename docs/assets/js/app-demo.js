@@ -22,13 +22,13 @@ const SHOWCASE = {
   key: 26,
   load: 1200,
   scenes: [
-    { tab: '버전 관리', title: '고칠 때마다 버전으로', text: '이력서를 고칠 때마다 v1, v2… 새 버전과 메모가 쌓입니다. 예전 버전은 그대로 남고, 두 버전을 비교하면 더한 글은 초록, 지운 글은 빨간색으로 보입니다.',
+    { tab: '버전 관리', title: '고칠 때마다 버전으로', text: '첫 초안부터 지금의 이력서까지, 고칠 때마다 새 버전과 메모가 쌓입니다. 예전 버전은 그대로 남고, 두 버전을 비교하면 더한 글은 초록, 지운 글은 빨간색으로 보입니다.',
       steps: [
-        { at: 'row:resume' },
-        { at: 'ver:resume:3', hold: 600 },
-        { at: 'ver:resume:2', hold: 600 },
-        { at: 'ver:resume:1', hold: 700 },
-        { at: 'ver:resume:4', hold: 700 },
+        { at: 'row:resume', hold: 500 },
+        { at: 'ver:resume:1', hold: 1000 },
+        { at: 'ver:resume:2', hold: 1000 },
+        { at: 'ver:resume:3', hold: 1000 },
+        { at: 'ver:resume:4', hold: 800 },
         { at: 'tb:compare', hold: 2200 },
         { at: 'tb:compare' },
       ] },
@@ -59,7 +59,7 @@ const SHOWCASE = {
   /* Data: the demo library. Notes come from assets/docs/<doc>/notes.json; these are the fallback (file://). */
   const DOCS = 'assets/docs/';
   const NOTES = {
-    resume: ['첫 정리', '출시 성과 숫자 추가', '모아장 프로젝트와 Kotlin 추가', '소개 문장 다듬고 위젯 성과 추가'],
+    resume: ['첫 초안', '섹션 나누고 성과 숫자 추가', '디자인 입히고 모아장 프로젝트 추가', '소개 문장 다듬고 위젯 성과 추가'],
     portfolio: ['사례 두 개로 첫 구성', '모아장 사례와 숫자 추가', '제목 바꾸고 위젯 지표 추가'],
     tailored: ['이력서 v4에서 서버 경험 중심으로 맞춤', '캐시 수치와 부하 테스트 추가'],
     daangn: ['이력서 v4에서 당근 공고에 맞춤'],

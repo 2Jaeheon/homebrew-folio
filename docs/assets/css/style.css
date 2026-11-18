@@ -349,44 +349,16 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .hero-mark { width: min(360px, 72vw); }
 @media (max-width: 760px) { .hero-sub br { display: none; } }
 
-/* Copy button with a turning chromatic metal ring (our own CSS take on a metal ring button).
-   --a turns the ring, --mx/--my follow the pointer for a small pressed-in highlight. */
-@property --a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.copy.metal {
-  --ring: conic-gradient(from var(--a), #f4f6fb, #8b93a7 12%, #6ee7ff 22%, #a78bfa 32%, #f9a8d4 40%, #fde68a 48%, #e5e7eb 58%, #4b5263 70%, #c7d2fe 82%, #f4f6fb);
+/* Hero copy button: a round dark key whose inside lights up where the pointer is (--mx/--my from main.js). */
+.copy.glow {
   --mx: 50%; --my: 50%;
-  position: relative; isolation: isolate; width: 36px; height: 36px; border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   background: radial-gradient(circle at var(--mx) var(--my), rgba(255, 255, 255, .16), transparent 60%), #1b1b21;
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, .12), inset 0 -2px 6px rgba(0, 0, 0, .6);
-  animation: ringTurn 3.2s linear infinite;
   transition: transform var(--feedback), color var(--feedback);
 }
-.copy.metal::before, .copy.metal::after {
-  content: ""; position: absolute; border-radius: 50%; background: var(--ring); pointer-events: none;
-  animation: inherit;
-}
-/* the 2px ring: the gradient shows only between the outer edge and the padding box */
-.copy.metal::before {
-  inset: -2px; padding: 2px;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude;
-}
-/* soft glow of the same metal behind the button */
-.copy.metal::after { inset: -5px; z-index: -1; filter: blur(9px); opacity: .45; }
-.copy.metal:hover { background: radial-gradient(circle at var(--mx) var(--my), rgba(255, 255, 255, .24), transparent 55%), #1f1f26; color: #fff; }
-.copy.metal:active { transform: scale(.93); }
-.copy.metal.done::after { opacity: .7; }
-.term-bar .copy.metal { width: 24px; height: 24px; margin-right: 4px; }
-.term-bar .copy.metal svg { width: 13px; height: 13px; }
-@keyframes ringTurn { to { --a: 360deg; } }
-@media (prefers-reduced-motion: reduce) { .copy.metal, .copy.metal::before, .copy.metal::after { animation: none; } }
-/* With WebGL2, assets/js/metal.js wraps each copy button in the real metal-fx ring and adds .fx. */
-.metal-slot, .metal-host { display: inline-flex; flex: none; }
-.term-bar .metal-slot { margin-left: auto; }
-.copy.metal.fx { animation: none; }
-/* The ring is painted under the button, so the button itself must stay see-through or it hides the ring. */
-.copy.metal.fx, .copy.metal.fx:hover { background: transparent; }
-.copy.metal.fx::before, .copy.metal.fx::after { content: none; }
+.copy.glow:hover { background: radial-gradient(circle at var(--mx) var(--my), rgba(255, 255, 255, .24), transparent 55%), #1f1f26; color: #fff; }
+.copy.glow:active { transform: scale(.93); }
 /* A smaller window (the whole app and its caption fit on a 900px-tall screen) under bigger scene tabs. */
 .showcase .app-frame { width: min(1000px, 100%); }
 .showcase { gap: 24px; }

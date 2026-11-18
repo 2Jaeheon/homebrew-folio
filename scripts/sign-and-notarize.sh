@@ -51,7 +51,8 @@ fi
 # Hardened runtime only loads libraries from the same team; ad hoc has none, so the dry run leaves it off.
 flags=(--options runtime --timestamp)
 [[ "$identity" == - ]] && flags=()
-sign() { codesign --force "${flags[@]}" --sign "$identity" "$@"; }
+# bash 3.2 treats an empty array as unbound under set -u, hence the + form.
+sign() { codesign --force ${flags[@]+"${flags[@]}"} --sign "$identity" "$@"; }
 sparkle="$app/Contents/Frameworks/Sparkle.framework"
 if [[ -d "$sparkle" ]]; then
     # Order from Sparkle's documentation; Downloader.xpc keeps its entitlements.
@@ -72,10 +73,11 @@ zip=Folio.zip
 rm -f "$zip"
 ditto -c -k --keepParent "$app" "$zip"
 
-if [[ "$identity" != - ]]; then
+notarize() {
+    [[ "$identity" == - ]] && return
     printf '%s' "$ASC_KEY_P8" > "$tmp/AuthKey.p8"
-    auth=(--key "$tmp/AuthKey.p8" --key-id "$ASC_KEY_ID" --issuer "$ASC_ISSUER_ID")
-    result="$(xcrun notarytool submit "$zip" "${auth[@]}" --wait --timeout 30m --output-format json)"
+    local auth=(--key "$tmp/AuthKey.p8" --key-id "$ASC_KEY_ID" --issuer "$ASC_ISSUER_ID") result
+    result="$(xcrun notarytool submit "$1" "${auth[@]}" --wait --timeout 30m --output-format json)"
     echo "$result"
     if [[ "$(jq -r .status <<<"$result")" != Accepted ]]; then
         xcrun notarytool log "$(jq -r .id <<<"$result")" "${auth[@]}" || true
@@ -83,6 +85,10 @@ if [[ "$identity" != - ]]; then
         exit 1
     fi
     rm -f "$tmp/AuthKey.p8"
+}
+
+notarize "$zip"
+if [[ "$identity" != - ]]; then
     xcrun stapler staple "$app"
     spctl --assess --type execute --verbose=2 "$app"
     # Re-zip so the download carries the stapled ticket.
@@ -90,3 +96,20 @@ if [[ "$identity" != - ]]; then
     ditto -c -k --keepParent "$app" "$zip"
 fi
 echo "Wrote $zip"
+
+# Drag-to-install disk image for the website's download button; Sparkle and the cask keep using the zip.
+dmg=Folio.dmg
+stage="$tmp/dmg"
+rm -rf "$stage" "$dmg"
+mkdir -p "$stage"
+ditto "$app" "$stage/Folio.app"
+ln -s /Applications "$stage/Applications"
+hdiutil create -volname Folio -srcfolder "$stage" -format UDZO -fs HFS+ "$dmg" >/dev/null
+rm -rf "$stage"
+codesign --force --timestamp --sign "$identity" "$dmg"
+notarize "$dmg"
+if [[ "$identity" != - ]]; then
+    xcrun stapler staple "$dmg"
+    spctl --assess --type open --context context:primary-signature --verbose=2 "$dmg"
+fi
+echo "Wrote $dmg"

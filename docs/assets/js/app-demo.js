@@ -22,7 +22,7 @@ const SHOWCASE = {
   key: 26,
   load: 1200,
   scenes: [
-    { tab: '버전 관리', title: '고칠 때마다 버전으로', text: '고칠 때마다 버전이 쌓이고, 두 버전을 바로 비교합니다.',
+    { tab: '버전 관리', title: '고칠 때마다 버전으로', text: '고칠 때마다 버전이 쌓이고 최신 버전과 이전 버전들을 비교합니다.', note: '※ 수정된 부분을 직접 짚어 주는 비교는 HTML 이력서에서만 지원합니다.',
       steps: [
         { at: 'row:resume', hold: 500 },
         { at: 'ver:resume:1', hold: 1000 },
@@ -40,7 +40,7 @@ const SHOWCASE = {
         { at: 'sheet:add', hold: 1050 },
         { at: 'post:scroll:560', scroll: true, hold: 1300 },
       ] },
-    { tab: '공고별 이력서', title: '공고마다 따로 다듬는 이력서', text: '공고마다 이력서를 따로 다듬고, 버전도 따로 쌓입니다.',
+    { tab: '공고별 이력서', title: '공고마다 따로 다듬는 이력서', text: '공고마다 이력서를 따로 다듬고 버전도 따로 쌓입니다.',
       steps: [
         { at: 'row:daangn', hold: 1600 },
         { at: 'row:webtoon', hold: 550 },
@@ -569,6 +569,12 @@ const SHOWCASE = {
     caption.classList.add('swap');
     setTimeout(() => {
       caption.textContent = sc.text;
+      if (sc.note) {
+        const note = document.createElement('small');
+        note.className = 'cap-note';
+        note.textContent = sc.note;
+        caption.append(note);
+      }
       caption.classList.remove('swap');
     }, 160);
   }

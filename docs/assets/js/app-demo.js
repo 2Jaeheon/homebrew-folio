@@ -43,10 +43,7 @@ const SHOWCASE = {
     { tab: '공고별 이력서', title: '공고마다 따로 다듬는 이력서', text: '공고마다 이력서를 따로 다듬고 버전도 따로 쌓입니다.',
       steps: [
         { at: 'row:daangn', hold: 1600 },
-        { at: 'row:webtoon', hold: 1200 },
-        { at: 'tb:compare', hold: 1800 },
-        { at: 'tb:inline', hold: 1200 },
-        { at: 'tb:compare' },
+        { at: 'row:webtoon', hold: 2000 },
       ] },
   ],
 };

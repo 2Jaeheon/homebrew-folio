@@ -384,6 +384,8 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 .metal-slot, .metal-host { display: inline-flex; flex: none; }
 .term-bar .metal-slot { margin-left: auto; }
 .copy.metal.fx { animation: none; }
+/* The ring is painted under the button, so the button itself must stay see-through or it hides the ring. */
+.copy.metal.fx, .copy.metal.fx:hover { background: transparent; }
 .copy.metal.fx::before, .copy.metal.fx::after { content: none; }
 /* A smaller window (the whole app and its caption fit on a 900px-tall screen) under bigger scene tabs. */
 .showcase .app-frame { width: min(1000px, 100%); }

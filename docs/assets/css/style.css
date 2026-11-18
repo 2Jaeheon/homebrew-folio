@@ -416,3 +416,6 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .88em;
 @keyframes ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(3.2); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .lineage .flow { display: none; } .lineage .ping { animation: none; } }
 .lineage text.cap-l { text-anchor: end; }
+
+/* The scene caption sits right under the tabs, one short line. */
+.showcase .caption { min-height: 1.6em; margin: -8px 0 4px; font-size: 16px; }

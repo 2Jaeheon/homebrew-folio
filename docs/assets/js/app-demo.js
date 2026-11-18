@@ -22,7 +22,7 @@ const SHOWCASE = {
   key: 26,
   load: 1200,
   scenes: [
-    { tab: '버전 관리', title: '고칠 때마다 버전으로', text: '첫 초안부터 지금의 이력서까지, 고칠 때마다 새 버전과 메모가 쌓입니다. 예전 버전은 그대로 남고, 두 버전을 비교하면 더한 글은 초록, 지운 글은 빨간색으로 보입니다.',
+    { tab: '버전 관리', title: '고칠 때마다 버전으로', text: '고칠 때마다 버전이 쌓이고, 두 버전을 바로 비교합니다.',
       steps: [
         { at: 'row:resume', hold: 500 },
         { at: 'ver:resume:1', hold: 1000 },
@@ -32,7 +32,7 @@ const SHOWCASE = {
         { at: 'tb:compare', hold: 2200 },
         { at: 'tb:compare' },
       ] },
-    { tab: '공고 추가', title: '공고 추가', text: '공고 URL을 붙여 넣고 불러오면 본문과 아이콘을 저장합니다. 공고가 내려가도 저장한 내용은 남아 있습니다.',
+    { tab: '공고 추가', title: '공고 추가', text: '공고 주소만 붙여 넣으면 본문까지 저장됩니다.',
       steps: [
         { at: 'sb:addApp', hold: 500 },
         { at: 'sheet:url', type: POSTING_URL, hold: 400 },
@@ -40,7 +40,7 @@ const SHOWCASE = {
         { at: 'sheet:add', hold: 1050 },
         { at: 'post:scroll:560', scroll: true, hold: 1300 },
       ] },
-    { tab: '공고별 이력서', title: '공고마다 따로 다듬는 이력서', text: '이력서 v4에서 시작해 공고마다 사본을 갈라 다듬습니다. 당근용과 네이버웹툰용이 각자의 버전으로 따로 쌓이고, 내 이력서는 그대로입니다.',
+    { tab: '공고별 이력서', title: '공고마다 따로 다듬는 이력서', text: '공고마다 이력서를 따로 다듬고, 버전도 따로 쌓입니다.',
       steps: [
         { at: 'row:daangn', hold: 1600 },
         { at: 'row:webtoon', hold: 550 },
@@ -568,7 +568,7 @@ const SHOWCASE = {
     const sc = SHOWCASE.scenes[i];
     caption.classList.add('swap');
     setTimeout(() => {
-      caption.innerHTML = `<strong>${sc.title}.</strong> ${sc.text}`;
+      caption.textContent = sc.text;
       caption.classList.remove('swap');
     }, 160);
   }

@@ -5,124 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>윤하람 이력서</title>
 <style>
-:root{--ink:#1d1f23;--sub:#6b7078;--line:#dcdfe3}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,'Apple SD Gothic Neo',Pretendard,sans-serif;color:var(--ink);background:#fff;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
-main{max-width:800px;margin:0 auto;padding:60px 56px 64px}
-header{padding-bottom:18px;border-bottom:1px solid var(--line)}
-.kicker{font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--sub);margin-bottom:6px}
-h1{font-size:40px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
-h1 span{display:none}
-.role{margin-top:8px;font-size:16px;color:var(--sub)}
-.contact{margin-top:6px;font-size:13px;color:var(--sub)}
-.contact a{color:var(--ink);text-decoration:none}
-.contact b{color:var(--line);margin:0 8px;font-weight:400}
-section{margin-top:32px}
-.label{margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-.label small,.label i{display:none}
-.label h2{font-size:17px;font-weight:700}
-.lead{font-size:16px}
-.lead em{font-style:normal;font-weight:600}
-.rail{list-style:none}
-.rail>li{display:grid;grid-template-columns:120px 1fr;gap:0 20px;margin-bottom:20px}
-.when{font-size:13px;color:var(--sub);padding-top:2px}
-.what h3{font-size:16px;font-weight:700}
-.what h3 span{font-weight:400;color:var(--sub);font-size:14px;margin-left:6px}
-.what p{margin-top:2px;color:var(--sub)}
-.what ul{margin-top:6px;list-style:none}
-.what li{position:relative;padding-left:14px;margin-top:3px}
-.what li::before{content:"-";position:absolute;left:0;color:var(--sub)}
-.num{font-weight:700}
-.tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
-.tags span{font-size:12px;padding:2px 8px;border-radius:4px;background:#f1f2f4;color:var(--sub)}
-.skills{display:grid;grid-template-columns:120px 1fr;gap:8px 20px}
-.skills dt{font-size:13px;font-weight:600;color:var(--sub)}
-footer{margin-top:40px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--sub);display:flex;justify-content:space-between}
+body{font-family:-apple-system, 'Apple SD Gothic Neo', Pretendard, sans-serif;color:#222;background:#fff;font-size:14.5px;line-height:1.65}
+main{max-width:760px;margin:0 auto;padding:56px 56px 72px}
+h1{font-size:30px;font-weight:700}
+.role{margin-top:4px;font-size:15px;color:#555}
+.contact{margin-top:6px;font-size:13px;color:#666}
+.contact a{color:inherit;text-decoration:none}
+.contact b{font-weight:400;margin:0 8px;color:#aaa}
+h2{font-size:13px;font-weight:700;letter-spacing:.08em;color:#333;border-bottom:1px solid #ccc;padding-bottom:6px;margin:30px 0 12px}
+.item{margin-top:14px}
+.item:first-of-type{margin-top:0}
+.head{display:flex;justify-content:space-between;align-items:baseline}
+h3{font-size:15px;font-weight:700}
+h3 span{font-weight:400;color:#666;margin-left:6px;font-size:14px}
+.date{font-size:12.5px;color:#777}
+.item>p{color:#555;margin-top:2px}
+ul{padding-left:18px;margin-top:6px}
+li{margin-top:3px}
+.skills p{margin-top:3px}
+.skills b{display:inline-block;width:64px;color:#555}
+ins{text-decoration:none;background:#d6f5d6;border-radius:3px;padding:0 2px}
+del{color:#c0392b;background:#fde2e0;text-decoration:line-through;border-radius:3px;padding:0 2px}
 </style>
 </head>
 <body>
 <main>
-<header>
-<div>
-<div class="kicker">IOS DEVELOPER · RESUME</div>
-<h1>윤하람<span>.</span></h1>
-<p class="role">작고 단단한 앱을 만드는 iOS 개발자</p>
+<h1>윤하람</h1>
+<p class="role">iOS 개발자 (4년 차)</p>
 <p class="contact"><a href="https://example.com">haram@example.com</a><b>/</b><a href="https://example.com">github.com/example</a><b>/</b>서울</p>
-</div>
-</header>
 
-<section>
-<div class="label"><small>01</small><h2>소개</h2><i></i></div>
-<p class="lead">4년 동안 SwiftUI로 매일 여는 생활 앱을 만들어 왔습니다. 화면 하나를 덜 만드는 쪽을 먼저 고민하고, 출시 뒤의 숫자로 결정을 다시 확인합니다.</p>
-</section>
+<h2>소개</h2>
+<p>4년 동안 SwiftUI로 매일 여는 생활 앱을 만들어 왔습니다. 화면 하나를 덜 만드는 쪽을 먼저 고민하고, 출시 뒤의 숫자로 결정을 다시 확인합니다.</p>
 
-<section>
-<div class="label"><small>02</small><h2>경력</h2><i></i></div>
-<ol class="rail">
-<li>
-<div class="when">2024.03 — 현재</div>
-<div class="what">
-<h3>포근랩 <span>iOS 개발자</span></h3>
+<h2>경력</h2>
+<div class="item">
+<div class="head"><h3>포근랩 <span>iOS 개발자</span></h3><span class="date">2024.03 – 현재</span></div>
 <p>월간 활성 사용자 40만 명의 습관 기록 앱 팀, iOS 3명 중 한 명</p>
 <ul>
 <li>UIKit 기반 습관 기록 앱 「하루결」을 SwiftUI와 Swift Concurrency로 단계적 전환 (화면 42개 중 38개)</li>
-<li>초기 로딩을 지연 로드 구조로 개편해 콜드 스타트 <span class="num">2.1초 → 0.9초</span></li>
-<li>크래시 리포트를 주간 회의 안건으로 올리는 흐름을 정착시켜 크래시 없는 세션 <span class="num">99.1% → 99.8%</span></li>
+<li>초기 로딩을 지연 로드 구조로 개편해 콜드 스타트 2.1초 → 0.9초</li>
+<li>크래시 리포트를 주간 회의 안건으로 올리는 흐름을 정착시켜 크래시 없는 세션 99.1% → 99.8%</li>
 </ul>
 </div>
-</li>
-<li>
-<div class="when">2022.09 — 2024.02</div>
-<div class="what">
-<h3>스튜디오 모래알 <span>주니어 iOS 개발자</span></h3>
+<div class="item">
+<div class="head"><h3>스튜디오 모래알 <span>주니어 iOS 개발자</span></h3><span class="date">2022.09 – 2024.02</span></div>
 <p>공간 예약 서비스를 만드는 8명 규모 스타트업</p>
 <ul>
 <li>공간 예약 앱 「빈자리」 iOS 클라이언트 개발, 예약 플로우와 결제 화면 담당</li>
 <li>디자인 시스템 컴포넌트 24종을 Swift Package로 분리해 두 앱에서 공유</li>
-<li>예약 단계를 5단계에서 3단계로 줄여 예약 완료율 <span class="num">+14%p</span></li>
+<li>예약 단계를 5단계에서 3단계로 줄여 예약 완료율 +14%p</li>
 </ul>
 </div>
-</li>
-</ol>
-</section>
 
-<section>
-<div class="label"><small>03</small><h2>프로젝트</h2><i></i></div>
-<ol class="rail">
-<li>
-<div class="when">2023.01 — 2023.08</div>
-<div class="what">
-<h3>잔잔 <span>개인 프로젝트</span></h3>
-<p>소리 없이 진동만으로 알려 주는 집중 타이머. App Store 출시, 누적 다운로드 1.2만.</p>
-<div class="tags"><span>SwiftUI</span><span>WidgetKit</span><span>Core Haptics</span></div>
+<h2>프로젝트</h2>
+<div class="item">
+<div class="head"><h3>잔잔 <span>개인 프로젝트</span></h3><span class="date">2023.01 – 2023.08</span></div>
+<p>소리 없이 진동만으로 알려 주는 집중 타이머. App Store 출시, 누적 다운로드 1.2만. SwiftUI, WidgetKit, Core Haptics.</p>
 </div>
-</li>
-</ol>
-</section>
 
-<section>
-<div class="label"><small>04</small><h2>기술</h2><i></i></div>
-<dl class="skills">
-<dt>주력</dt><dd>Swift, SwiftUI, Swift Concurrency, Combine, UIKit</dd>
-<dt>데이터</dt><dd>SwiftData, Core Data, URLSession, GRDB</dd>
-<dt>품질</dt><dd>XCTest, Swift Testing, Instruments, Xcode Cloud</dd>
-
-</dl>
-</section>
-
-<section>
-<div class="label"><small>05</small><h2>학력</h2><i></i></div>
-<ol class="rail">
-<li>
-<div class="when">2016.03 — 2022.08</div>
-<div class="what">
-<h3>가람대학교 <span>컴퓨터공학과 학사</span></h3>
+<h2>기술</h2>
+<div class="skills">
+<p><b>주력</b>Swift, SwiftUI, Swift Concurrency, Combine, UIKit</p>
+<p><b>데이터</b>SwiftData, Core Data, URLSession, GRDB</p>
+<p><b>품질</b>XCTest, Swift Testing, Instruments, Xcode Cloud</p>
 </div>
-</li>
-</ol>
-</section>
 
-<footer><span>윤하람 · 이력서</span><span>2026</span></footer>
+<h2>학력</h2>
+<div class="item">
+<div class="head"><h3>가람대학교 <span>컴퓨터공학과 학사</span></h3><span class="date">2016.03 – 2022.08</span></div>
+</div>
 </main>
 </body>
 </html>

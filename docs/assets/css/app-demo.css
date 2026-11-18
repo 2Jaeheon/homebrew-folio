@@ -221,6 +221,8 @@
 .dview.empty svg { width: 44px; height: 36px; stroke-width: 1.4; color: #b0b0b5; }
 .dview.empty p { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
 .backdrop { background: #ededef; }
+/* As in the app: the toolbar is a white bar across the top; the gray behind the page starts under it. */
+.dview.doc.backdrop { background: linear-gradient(#fff 0 52px, rgba(0, 0, 0, .07) 52px 53px, #ededef 53px); }
 .paper { position: absolute; inset: 73px 24px -40px; overflow: hidden; border-radius: 6px; background: #fff; box-shadow: 0 0 0 .5px rgba(0, 0, 0, .08), 0 1px 4px rgba(0, 0, 0, .08); }
 .paper iframe {
   position: absolute; left: 0; top: 0; width: 900px; height: var(--fh, 2000px); border: 0; background: #fff;

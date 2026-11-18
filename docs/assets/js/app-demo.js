@@ -24,7 +24,7 @@ const SHOWCASE = {
   key: 26,
   load: 1200,
   scenes: [
-    { tab: '버전 관리', title: '고칠 때마다 버전으로', text: '고칠 때마다 버전이 쌓이고 최신 버전과 이전 버전들을 비교합니다.', note: '※ 수정된 부분을 직접 짚어 주는 비교는 HTML 이력서에서만 지원합니다.',
+    { tab: '버전 관리', title: '고칠 때마다 버전으로', text: '고칠 때마다 버전이 쌓이고 최신 버전과 이전 버전들을 비교해요.', note: '※ 수정된 부분을 직접 짚어 주는 비교는 HTML 이력서에서만 지원해요.',
       steps: [
         { at: 'row:resume', hold: 500 },
         { at: 'ver:resume:1', hold: 1000 },
@@ -34,7 +34,7 @@ const SHOWCASE = {
         { at: 'tb:compare', hold: 2200 },
         { at: 'tb:compare' },
       ] },
-    { tab: '공고 추가', title: '공고 추가', text: '공고 주소만 붙여 넣으면 본문까지 저장됩니다.',
+    { tab: '공고 추가', title: '공고 추가', text: '공고 주소만 붙여 넣으면 본문까지 저장돼요.',
       steps: [
         { at: 'sb:addApp', hold: 500 },
         { at: 'sheet:url', type: POSTING_URL, hold: 400 },
@@ -42,7 +42,7 @@ const SHOWCASE = {
         { at: 'sheet:add', hold: 1050 },
         { at: 'post:scroll:560', scroll: true, hold: 1300 },
       ] },
-    { tab: '공고별 이력서', title: '공고마다 따로 다듬는 이력서', text: '공고마다 이력서를 따로 다듬고 버전도 따로 쌓입니다.',
+    { tab: '공고별 이력서', title: '공고마다 따로 다듬는 이력서', text: '공고마다 이력서를 따로 다듬고 버전도 따로 쌓여요.',
       steps: [
         { at: 'row:daangn', hold: 1600 },
         { at: 'row:webtoon', hold: 2000 },

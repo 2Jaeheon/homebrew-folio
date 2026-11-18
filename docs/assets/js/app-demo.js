@@ -9,6 +9,7 @@
  *   lead:  pause after a scene starts, before the pointer moves
  *   move:  pointer travel time to the next target
  *   press: pointer down before the click lands
+ *   loop:  pause after a scene's last step before it plays again from the start
  *   hold:  wait after a click before the next step
  *   key:   time per typed letter
  *   load:  how long 공고를 불러오는 중… shows before the page is loaded
@@ -18,6 +19,7 @@ const SHOWCASE = {
   lead: 350,
   move: 600,
   press: 130,
+  loop: 1600,
   hold: 900,
   key: 26,
   load: 1200,
@@ -515,18 +517,18 @@ const SHOWCASE = {
   let playing = 0;
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
-  async function playScene(i) {
+  // A scene plays over and over until another tab is picked. A tab jumps straight to its scene's start; a replay
+  // moves back to it with the usual motion. With reduced motion the scene's end state just stays.
+  async function playScene(i, replay = false) {
     const token = ++playing;
-    setCaption(i);
-    app.removeAttribute('data-live');
+    if (!replay) setCaption(i);
     if (reduce.matches) {
       state = startOf(i + 1);
       render(true);
-      app.setAttribute('data-live', '');
       return;
     }
     const start = startOf(i);
-    if (!same(state, start)) { state = start; render(true); }
+    if (!same(state, start)) { state = start; render(!replay); }
     await wait(SHOWCASE.lead);
     for (const step of SHOWCASE.scenes[i].steps) {
       if (token !== playing) return;
@@ -542,18 +544,10 @@ const SHOWCASE = {
       }
       await wait(step.hold ?? SHOWCASE.hold);
     }
-    if (token === playing) app.setAttribute('data-live', '');
+    if (token !== playing) return;
+    await wait(SHOWCASE.loop);
+    if (token === playing) playScene(i, true);
   }
-
-  // Visitors can press the same controls once a scene has played.
-  app.addEventListener('click', (e) => {
-    const el = e.target.closest('[data-at]');
-    if (!el || !app.hasAttribute('data-live') || el.closest('.lcopy')) return;
-    if (state.sheet && !el.closest('.sheet')) return; // the sheet is modal
-    pointer.classList.remove('on');
-    state = act(state, el.dataset.at);
-    render();
-  });
 
   /* Captions and scene tabs */
   const showcase = frame.closest('.showcase');

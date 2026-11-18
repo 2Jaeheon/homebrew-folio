@@ -58,7 +58,6 @@
 .row .meta { font-size: 11px; font-weight: 500; color: var(--ink2); font-variant-numeric: tabular-nums; }
 .row img { width: 16px; height: 16px; border-radius: 4px; flex: none; }
 .row svg { width: 17px; height: 17px; }
-.app[data-live] .row[data-at]:hover { background: rgba(0, 0, 0, .045); }
 /* A newly added application opens its row (`state`); the negative margin cancels the list gap while closed. */
 .grow { display: grid; grid-template-rows: 0fr; margin-top: -6px; opacity: 0; transition: grid-template-rows var(--state), margin var(--state), opacity var(--state); }
 .grow > div { overflow: hidden; min-height: 0; }
@@ -98,7 +97,7 @@
 .tb-title b { font-size: 13px; font-weight: 700; line-height: 16px; }
 .tb-title span { font-size: 11px; color: var(--ink2); line-height: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .app[data-kind="none"] .tb-lead { opacity: 0; }
-.tb-trail { position: absolute; right: 14px; top: 8px; display: flex; gap: 10px; pointer-events: auto; }
+.tb-trail { position: absolute; right: 14px; top: 8px; display: flex; gap: 10px; }
 .cap {
   height: 36px; display: flex; align-items: center; gap: 2px; padding: 0 4px; border-radius: 999px;
   background: rgba(255, 255, 255, .82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
@@ -109,13 +108,13 @@
 .cap[hidden], .cap [hidden], .picker[hidden] { display: none; }
 .btn-in { position: relative; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 999px; white-space: nowrap; transition: color var(--hover); }
 .btn-in svg { width: 15px; height: 15px; }
-.app[data-live] .btn-in:hover, .btn-in.hov { color: var(--accent); }
+.btn-in.hov { color: var(--accent); }
 .base { gap: 3px; }
 .base svg { width: 10px; height: 10px; stroke-width: 2; }
 /* ToolbarCapsuleLabel: no fill of its own. Switched on (비교 끄기) it turns red; with nothing to compare it is greyed out. */
 .toggle { transition: color var(--content); }
-.toggle.on, .toggle.on.hov, .app[data-live] .toggle.on:hover { color: #ff3b30; }
-.toggle.off, .toggle.off.hov, .app[data-live] .toggle.off:hover { color: var(--ink3); }
+.toggle.on, .toggle.on.hov { color: #ff3b30; }
+.toggle.off, .toggle.off.hov { color: var(--ink3); }
 .toggle .label { display: inline-grid; }
 .toggle .label > * { grid-area: 1 / 1; text-align: center; }
 /* SlidingPicker */
@@ -154,8 +153,6 @@
   transition: color var(--feedback), border-color var(--feedback), background var(--feedback);
 }
 .slot svg { width: 13px; height: 13px; }
-.app[data-live] .slot:hover, .app[data-live] .add:hover { color: var(--accent); border-color: var(--accent); }
-.app[data-live] .slot:hover { background: rgba(0, 136, 255, .08); }
 .vrow { display: flex; align-items: flex-start; gap: 8px; padding: 0 10px; border-radius: 10px; }
 .vsum { flex: 1; display: flex; align-items: baseline; gap: 8px; padding: 6px 0; min-width: 0; }
 .vn { width: 32px; flex: none; font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -321,3 +318,6 @@
   .app *, .app *::before { transition: none !important; animation: none !important; }
   .pointer { display: none; }
 }
+
+/* Watch only: the scenes play by themselves, so nothing in the window takes a click, a hover or a scroll. */
+.app { pointer-events: none; }

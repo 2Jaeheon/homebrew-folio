@@ -43,8 +43,7 @@ const SHOWCASE = {
     { tab: '공고별 이력서', title: '공고마다 따로 다듬는 이력서', text: '공고마다 이력서를 따로 다듬고 버전도 따로 쌓입니다.',
       steps: [
         { at: 'row:daangn', hold: 1600 },
-        { at: 'row:webtoon', hold: 550 },
-        { at: 'ver:tailored:2', hold: 900 },
+        { at: 'row:webtoon', hold: 1200 },
         { at: 'tb:compare', hold: 1800 },
         { at: 'tb:inline', hold: 1200 },
         { at: 'tb:compare' },
@@ -238,7 +237,7 @@ const SHOWCASE = {
 
   function act(s, at) {
     const [kind, a, b] = at.split(':');
-    if (kind === 'row') { s.sel = a; s.comparing = false; s.postY = 0; if (APPINFO[a]) s.item = APPINFO[a].noPosting ? DATES[APPINFO[a].doc].length : 'jd'; }
+    if (kind === 'row') { s.sel = a; s.comparing = false; s.postY = 0; if (APPINFO[a]) s.item = DATES[APPINFO[a].doc].length; } // an application opens on its latest resume; 공고 내용 shows the posting
     if (kind === 'ver' && MASTERS[a]) s.ver[a] = +b;
     else if (kind === 'ver') s.item = +b;
     if (kind === 'app' && !APPINFO[s.sel]?.noPosting) { s.item = a; s.postY = 0; }

@@ -3,7 +3,9 @@
 Folio 설치용 Homebrew tap입니다.
 
 ```bash
-brew install --cask moduggagi/folio/folio
+brew tap moduggagi/folio
+brew trust moduggagi/folio
+brew install --cask folio
 ```
 
 직접 받기: [Folio.zip](https://github.com/MODUGGAGI/homebrew-folio/releases/latest/download/Folio.zip)
